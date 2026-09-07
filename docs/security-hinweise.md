@@ -26,6 +26,14 @@ Nutzereingaben. Die Seite ist vollständig statisch; es gibt keinen Eingabepfad.
 `js/main.js` liest ausschließlich eigene Fragment-Bezeichner und löst sie über
 `getElementById` auf, nicht über einen aus dem `href` zusammengesetzten Selektor.
 
+**Sprachrouting (`js/lang.js`).** Das Weiterleitungsziel ist hart kodiert
+(`de/` bzw. `../`) und wird nie aus `localStorage`, aus der URL oder aus einem
+Attribut zusammengesetzt — ein manipulierter Speicherwert kann also keine
+Open-Redirect-Lücke öffnen. Der gelesene Wert wird zusätzlich gegen die
+Whitelist `en`/`de` geprüft und sonst verworfen. Jeder Speicherzugriff liegt in
+einem `try`/`catch`, weil der Zugriff im privaten Modus eine Exception wirft;
+im Fehlerfall entscheidet einfach wieder die Browsersprache.
+
 **A03 — Supply Chain.** Null Laufzeit-Abhängigkeiten, null Build-Abhängigkeiten,
 kein `package.json`, kein CDN. Damit gibt es nichts zu auditieren und keine
 SBOM-Fläche außer den eigenen Dateien.

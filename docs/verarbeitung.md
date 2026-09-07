@@ -4,7 +4,9 @@ Stand: 2026-09-07. Pflegen, sobald sich am Quellcode oder am Hosting etwas ände
 Grundlage: Art. 30 DSGVO (Verzeichnis von Verarbeitungstätigkeiten), Art. 6 DSGVO
 (Rechtsgrundlage je Verarbeitung), Art. 5 Abs. 1 lit. e DSGVO (Speicherbegrenzung).
 
-Verantwortlicher: Maximilian Haug, Ludwig-Thoma-Str. 23c, 85247 Schwabhausen.
+Verantwortlicher: siehe `impressum.html` (dort stehen die Pflichtangaben nach
+§ 5 DDG). Personenbezogene Betreiberdaten stehen absichtlich nur dort und nicht
+zusätzlich in dieser Datei.
 
 ## V1 — Auslieferung der Website
 
@@ -34,13 +36,31 @@ Verantwortlicher: Maximilian Haug, Ludwig-Thoma-Str. 23c, 85247 Schwabhausen.
 | Speicherdauer | Bis zur abschließenden Bearbeitung; danach löschen, soweit keine handels- oder steuerrechtliche Aufbewahrungspflicht besteht |
 | Löschkonzept | Manuell im Postfach |
 
+## V3 — Sprachwahl im Browser
+
+| Feld | Wert |
+|---|---|
+| Zweck | Merkt die vom Besucher gewählte Sprachfassung (`/` englisch, `/de/` deutsch) |
+| Datenkategorien | ein `localStorage`-Eintrag `haugit.lang` mit dem Wert `en` oder `de` |
+| Auslöser | ausschließlich ein Klick auf den EN/DE-Schalter. Die automatische Erkennung **liest** nur `navigator.language` und schreibt nichts |
+| Empfänger | keine — der Wert verlässt den Browser nicht, weder zum Server noch zu Dritten |
+| Personenbezug | keiner: kein Identifier, keine Zusammenführung, kein Rückschluss auf eine Person |
+| § 25 TDDDG | Abs. 2 Nr. 2 — für den ausdrücklich gewünschten Dienst unbedingt erforderlich, daher einwilligungsfrei (**LEGAL-REVIEW**: gängige Auslegung, aber eine Einschätzung) |
+| Speicherdauer | bis der Besucher die Websitedaten in seinem Browser löscht |
+| Löschkonzept | in der Hand des Besuchers; die Seite funktioniert ohne den Eintrag unverändert |
+
+Wenn das nicht gewollt ist: `js/lang.js` und den `data-set-lang`-Block in
+`js/main.js` entfernen — dann entscheidet bei jedem Aufruf die Browsersprache,
+und es wird gar nichts gespeichert.
+
 ## Bewusst nicht vorhandene Verarbeitungen
 
 Die folgenden Dinge existieren auf dieser Website **nicht** und dürfen ohne neue
 Bewertung auch nicht eingeführt werden:
 
 - Kontaktformular oder sonstige Formulare (`form-action 'none'` in der CSP)
-- Cookies, `localStorage`, `sessionStorage`, IndexedDB → § 25 TDDDG nicht berührt
+- Cookies, `sessionStorage`, IndexedDB
+- `localStorage` für irgendetwas anderes als V3
 - Analytics, Tag-Manager, Pixel, A/B-Testing, Fingerprinting
 - Externe Schriftarten, Icon-Dienste, JS-Bibliotheken von einem CDN
 - Eingebettete Karten, Videos, Social-Plugins, Captchas

@@ -18,12 +18,12 @@
 
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="./">
         <span class="brand__sigil">~/</span><span>haug-it</span><span class="brand__dim">.eu</span>
       </a>
       <nav class="nav" aria-label="Hauptnavigation">
         <ul>
-          <li><a href="index.html">Start</a></li>
+          <li><a href="./" lang="en">Start</a></li>
           <li><a href="impressum.html">Impressum</a></li>
           <li><a href="datenschutz.html" aria-current="page">Datenschutz</a></li>
         </ul>
@@ -36,6 +36,14 @@
       <div class="container prose">
         <p class="eyebrow">Rechtliches</p>
         <h1>Datenschutzerklärung</h1>
+
+        <p class="note" lang="en">
+          <strong>In English:</strong> this is the privacy notice required by
+          Art. 13 GDPR. It is published in German because that is the legally
+          binding version. In short: the site sets no cookies, loads nothing
+          from third parties, and stores one thing locally — your language
+          choice — only if you use the EN/DE switch.
+        </p>
 
         <div class="todo">
           <strong>TODO: Rechtstext von Anwalt / Generator.</strong>
@@ -64,17 +72,69 @@
         <h2>2. Was diese Seite <em>nicht</em> tut</h2>
         <ul>
           <li>Keine Cookies.</li>
-          <li>Kein <code>localStorage</code>, <code>sessionStorage</code> oder IndexedDB.</li>
           <li>Keine Analyse-, Tracking- oder A/B-Testing-Werkzeuge.</li>
+          <li>Kein Fingerprinting.</li>
           <li>Keine externen Schriftarten, Icon-Dienste oder JavaScript-Bibliotheken (kein CDN).</li>
           <li>Keine eingebetteten Karten, Videos, Social-Plugins oder Captchas.</li>
           <li>Kein Kontaktformular und keine Newsletter-Anmeldung.</li>
+          <li>Kein <code>sessionStorage</code>, kein IndexedDB.</li>
         </ul>
+
+        <h3>Die einzige Speicherung auf Ihrem Endgerät: die Sprachwahl</h3>
         <p>
-          Da beim Aufruf dieser Seite weder Informationen auf Ihrem Endgerät
-          gespeichert noch von dort ausgelesen werden, ist keine Einwilligung
-          nach § 25 Abs. 1 TDDDG erforderlich. Deshalb gibt es hier bewusst
-          kein Cookie-Banner.
+          Diese Website gibt es auf Englisch (<code>/</code>) und auf Deutsch
+          (<code>/de/</code>). Beim ersten Aufruf entscheidet die Spracheinstellung
+          Ihres Browsers, welche Fassung Sie sehen. Diese Einstellung wird nur
+          <em>gelesen</em>, nicht gespeichert.
+        </p>
+        <p>
+          Erst wenn Sie den Schalter <strong>EN/DE</strong> oben benutzen, legt
+          die Seite genau einen Eintrag im <code>localStorage</code> Ihres
+          Browsers ab:
+        </p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption class="visually-hidden">Im Browser gespeicherter Eintrag</caption>
+            <thead>
+              <tr>
+                <th scope="col">Schlüssel</th>
+                <th scope="col">Inhalt</th>
+                <th scope="col">Zweck</th>
+                <th scope="col">Dauer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>haugit.lang</code></td>
+                <td><code>en</code> oder <code>de</code></td>
+                <td>Merkt die von Ihnen gewählte Sprache</td>
+                <td>Bis Sie die Websitedaten in Ihrem Browser löschen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Dieser Eintrag bleibt ausschließlich in Ihrem Browser. Er wird nicht an
+          den Server, an mich oder an Dritte übertragen, enthält keine Kennung
+          und lässt keinen Rückschluss auf Ihre Person zu. Sie können ihn
+          jederzeit über die Websitedaten Ihres Browsers löschen; die Seite
+          funktioniert danach unverändert und richtet sich wieder nach Ihrer
+          Browsersprache.
+        </p>
+        <p>
+          Eine Sprachwahl ist unbedingt erforderlich, damit der von Ihnen
+          ausdrücklich gewünschte Dienst in der gewünschten Sprache bereitgestellt
+          werden kann. Sie fällt damit unter die Ausnahme des
+          § 25 Abs. 2 Nr. 2 TDDDG und ist nicht einwilligungsbedürftig. Da darüber
+          hinaus nichts auf Ihrem Endgerät gespeichert oder von dort ausgelesen
+          wird, gibt es hier bewusst kein Cookie-Banner.
+        </p>
+        <p class="todo">
+          <strong>LEGAL-REVIEW:</strong> Die Einordnung der Sprachwahl unter
+          § 25 Abs. 2 Nr. 2 TDDDG ist die gängige Auslegung, aber eine
+          Einschätzung und kein Gerichtsurteil. Wer ganz auf der sicheren Seite
+          sein will, verzichtet auf die Speicherung und lässt bei jedem Aufruf
+          die Browsersprache entscheiden.
         </p>
 
         <h2>3. Aufruf der Website (Server-Logfiles)</h2>
@@ -181,10 +241,10 @@
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <p class="site-footer__note">&copy; 2026 Maximilian Haug — haug-it.eu</p>
+      <p class="site-footer__note">&copy; 2026 haug-it.eu</p>
       <nav aria-label="Rechtliches">
         <ul>
-          <li><a href="index.html">Start</a></li>
+          <li><a href="./" lang="en">Start</a></li>
           <li><a href="impressum.html">Impressum</a></li>
           <li><a href="datenschutz.html">Datenschutz</a></li>
         </ul>

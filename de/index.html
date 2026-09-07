@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- A02: GitHub Pages cannot set response headers, so the policy is declared
-       here. No 'unsafe-inline', no wildcards. frame-ancestors is not supported
-       in a meta tag - see docs/security-hinweise.md. -->
+  <!-- A02: GitHub Pages kann keine Response-Header setzen, deshalb steht die
+       Policy hier. Kein 'unsafe-inline', keine Wildcards. frame-ancestors wird
+       im Meta-Tag ignoriert - siehe docs/security-hinweise.md. -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <title>haug-it.eu — IT administration &amp; automation</title>
-  <meta name="description" content="Windows client deployment, Active Directory, Linux and container platforms, and monitoring — scripted rather than clicked.">
-  <link rel="canonical" href="https://haug-it.eu/">
+  <title>haug-it.eu — IT-Administration &amp; Automatisierung</title>
+  <meta name="description" content="Windows-Client-Deployment, Active Directory, Linux und Container, Monitoring — geskriptet statt geklickt.">
+  <link rel="canonical" href="https://haug-it.eu/de/">
   <link rel="alternate" hreflang="en" href="https://haug-it.eu/">
   <link rel="alternate" hreflang="de" href="https://haug-it.eu/de/">
   <link rel="alternate" hreflang="x-default" href="https://haug-it.eu/">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/lang.js"></script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/lang.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
   <header class="site-header">
     <div class="container site-header__inner">
@@ -31,19 +31,19 @@
       </a>
 
       <div class="header__end">
-        <nav class="nav" aria-label="Main">
+        <nav class="nav" aria-label="Hauptnavigation">
           <ul>
-            <li><a href="#focus">Focus</a></li>
+            <li><a href="#schwerpunkte">Schwerpunkte</a></li>
             <li><a href="#stack">Stack</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#projekte">Projekte</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
           </ul>
         </nav>
 
-        <nav aria-label="Language">
+        <nav aria-label="Sprache">
           <ul class="lang-switch">
-            <li><a href="./" data-set-lang="en" aria-current="true" lang="en">EN</a></li>
-            <li><a href="de/" data-set-lang="de" lang="de">DE</a></li>
+            <li><a href="../" data-set-lang="en" lang="en">EN</a></li>
+            <li><a href="./" data-set-lang="de" aria-current="true" lang="de">DE</a></li>
           </ul>
         </nav>
       </div>
@@ -58,26 +58,26 @@
         <div>
           <p class="hero__status">
             <span class="hero__dot" aria-hidden="true"></span>
-            Germany &middot; EU
+            Deutschland &middot; EU
           </p>
 
-          <h1 class="hero__name">IT administration, automated</h1>
+          <h1 class="hero__name">IT-Administration, automatisiert</h1>
           <p class="hero__role">@Da-Hauge</p>
 
           <p class="hero__text">
-            I build the invisible half of IT: Windows clients that install
-            themselves, Active&nbsp;Directory that does not expire every password
-            at once in the middle of the working day, and Linux containers that
-            are still running in the morning. If something needs clicking twice,
-            I write a script for it instead.
+            Ich baue die unsichtbare Hälfte der IT: Windows-Clients, die sich
+            selbst aufsetzen, Active&nbsp;Directory, das nicht mitten im Betrieb
+            alle Passwörter gleichzeitig ablaufen lässt, und Linux-Container, die
+            morgens noch laufen. Wenn ich etwas zweimal klicken muss, schreibe
+            ich ein Skript dafür.
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#projects">
-              See the work
+            <a class="btn btn--primary" href="#projekte">
+              Projekte ansehen
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <a class="btn btn--ghost" href="#contact">Get in touch</a>
+            <a class="btn btn--ghost" href="#kontakt">Kontakt aufnehmen</a>
           </div>
         </div>
 
@@ -87,17 +87,17 @@
             <span class="terminal__title">pwsh — haug-it.eu</span>
           </div>
           <pre class="terminal__body"><code><span class="terminal__prompt">hauge@haug-it:~$</span> <span class="terminal__cmd">whoami</span>
-systems administration &middot; deployment &middot; homelab
+Systemadministration &middot; Deployment &middot; Homelab
 
 <span class="terminal__prompt">hauge@haug-it:~$</span> <span class="terminal__cmd">Get-Content .\stack.txt</span>
-<span class="terminal__key">windows</span>   Windows 11, deployment without Intune
+<span class="terminal__key">windows</span>   Windows 11, Deployment ohne Intune
 <span class="terminal__key">directory</span> Active Directory, GPO, ADSync
 <span class="terminal__key">shell</span>     PowerShell 5.1 &amp; 7, Bash
 <span class="terminal__key">platform</span>  Proxmox, LXC, Docker, Debian
-<span class="terminal__key">monitor</span>   PRTG, InfluxDB, speedtest sensors
+<span class="terminal__key">monitor</span>   PRTG, InfluxDB, Speedtest-Sensorik
 
 <span class="terminal__prompt">hauge@haug-it:~$</span> <span class="terminal__cmd">./deploy.ps1 -Unattended</span>
-[ok] 0 clicks, 0 surprises
+[ok] 0 Klicks, 0 Überraschungen
 
 <span class="terminal__prompt">hauge@haug-it:~$</span> <span class="terminal__caret" aria-hidden="true"></span></code></pre>
         </div>
@@ -106,15 +106,15 @@ systems administration &middot; deployment &middot; homelab
 
     <hr>
 
-    <!-- ================= Focus ================= -->
-    <section class="section" id="focus" aria-labelledby="focus-title">
+    <!-- ================= Schwerpunkte ================= -->
+    <section class="section" id="schwerpunkte" aria-labelledby="schwerpunkte-title">
       <div class="container">
         <div class="section__head">
-          <p class="eyebrow">01 — Focus</p>
-          <h2 id="focus-title">Where the time actually goes</h2>
+          <p class="eyebrow">01 — Schwerpunkte</p>
+          <h2 id="schwerpunkte-title">Wo die Zeit tatsächlich hingeht</h2>
           <p class="section__lead">
-            Four areas where repeated manual work turned into something
-            reproducible.
+            Vier Bereiche, in denen aus wiederkehrender Handarbeit etwas
+            Reproduzierbares geworden ist.
           </p>
         </div>
 
@@ -124,14 +124,15 @@ systems administration &middot; deployment &middot; homelab
             <span class="card__icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
             </span>
-            <h3 class="card__title">Client deployment</h3>
+            <h3 class="card__title">Client-Deployment</h3>
             <p class="card__text">
-              Windows 11 installs that run without an audience: answer files,
-              debloat, sane privacy defaults and software rollout in a single pass.
+              Windows-11-Installationen, die ohne Zuschauer durchlaufen:
+              Antwortdateien, Debloat, vernünftige Datenschutz-Defaults und
+              Softwareverteilung in einem Durchgang.
             </p>
             <ul class="card__list">
               <li>autounattend.xml</li>
-              <li>winget package lists</li>
+              <li>winget-Paketlisten</li>
               <li>Office Deployment Tool</li>
             </ul>
           </article>
@@ -142,14 +143,14 @@ systems administration &middot; deployment &middot; homelab
             </span>
             <h3 class="card__title">Active Directory</h3>
             <p class="card__text">
-              Domain joins, group policy, and above all the password lifecycle:
-              expiry at the morning logon rather than mid-shift, so the help desk
-              stays quiet.
+              Domain-Beitritt, Gruppenrichtlinien und vor allem der
+              Passwort-Lebenszyklus: Ablauf an der Morgenanmeldung statt mitten
+              im Betrieb, damit die Hotline ruhig bleibt.
             </p>
             <ul class="card__list">
-              <li>Domain join &amp; rename</li>
-              <li>Password lifecycle</li>
-              <li>Logon reporting</li>
+              <li>Domain Join &amp; Rename</li>
+              <li>Passwort-Lifecycle</li>
+              <li>Logon-Reporting</li>
             </ul>
           </article>
 
@@ -157,15 +158,16 @@ systems administration &middot; deployment &middot; homelab
             <span class="card__icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 8h.01"/><path d="M7 17h.01"/></svg>
             </span>
-            <h3 class="card__title">Linux &amp; containers</h3>
+            <h3 class="card__title">Linux &amp; Container</h3>
             <p class="card__text">
-              Proxmox underneath, LXC and Docker on top. Compose stacks that live
-              versioned in a repository instead of in somebody's shell history.
+              Proxmox als Unterbau, LXC und Docker darüber. Compose-Stacks, die
+              versioniert im Repository liegen statt in irgendeinem
+              Terminal-Verlauf.
             </p>
             <ul class="card__list">
               <li>Proxmox &amp; LXC</li>
               <li>Docker Compose</li>
-              <li>VS Code tunnel</li>
+              <li>VS Code Tunnel</li>
             </ul>
           </article>
 
@@ -175,14 +177,14 @@ systems administration &middot; deployment &middot; homelab
             </span>
             <h3 class="card__title">Monitoring</h3>
             <p class="card__text">
-              Custom PRTG sensors for the things the stock sensors stop at — such
-              as Ookla speedtests that end up as a time series instead of a gut
-              feeling.
+              Eigene PRTG-Sensoren, wo die Standardsensoren aufhören — zum
+              Beispiel Ookla-Speedtests, die als Zeitreihe landen statt als
+              Bauchgefühl.
             </p>
             <ul class="card__list">
-              <li>PRTG custom sensors</li>
-              <li>InfluxDB time series</li>
-              <li>Scheduled measurements</li>
+              <li>PRTG Custom Sensors</li>
+              <li>InfluxDB-Zeitreihen</li>
+              <li>Geplante Messläufe</li>
             </ul>
           </article>
 
@@ -195,20 +197,20 @@ systems administration &middot; deployment &middot; homelab
       <div class="container">
         <div class="section__head">
           <p class="eyebrow">02 — Stack</p>
-          <h2 id="stack-title">Toolbox</h2>
+          <h2 id="stack-title">Werkzeugkasten</h2>
           <p class="section__lead">
-            None of this is here for its own sake — every tool on the list is
-            keeping something running.
+            Nichts davon ist Selbstzweck — jedes Werkzeug auf der Liste hält
+            etwas am Laufen.
           </p>
         </div>
 
         <div class="stack-group">
-          <h3 class="stack-group__label">Windows &amp; directory</h3>
+          <h3 class="stack-group__label">Windows &amp; Directory</h3>
           <ul class="tags">
             <li class="tag">PowerShell</li>
             <li class="tag">Windows 11</li>
             <li class="tag">Active Directory</li>
-            <li class="tag">Group Policy</li>
+            <li class="tag">Gruppenrichtlinien</li>
             <li class="tag">winget</li>
             <li class="tag">Office Deployment Tool</li>
             <li class="tag">autounattend</li>
@@ -216,7 +218,7 @@ systems administration &middot; deployment &middot; homelab
         </div>
 
         <div class="stack-group">
-          <h3 class="stack-group__label">Linux &amp; platform</h3>
+          <h3 class="stack-group__label">Linux &amp; Plattform</h3>
           <ul class="tags">
             <li class="tag">Debian</li>
             <li class="tag">Proxmox VE</li>
@@ -229,7 +231,7 @@ systems administration &middot; deployment &middot; homelab
         </div>
 
         <div class="stack-group">
-          <h3 class="stack-group__label">Monitoring &amp; operations</h3>
+          <h3 class="stack-group__label">Monitoring &amp; Betrieb</h3>
           <ul class="tags">
             <li class="tag">PRTG</li>
             <li class="tag">InfluxDB</li>
@@ -240,7 +242,7 @@ systems administration &middot; deployment &middot; homelab
         </div>
 
         <div class="stack-group">
-          <h3 class="stack-group__label">Web &amp; other</h3>
+          <h3 class="stack-group__label">Web &amp; Sonstiges</h3>
           <ul class="tags">
             <li class="tag">HTML</li>
             <li class="tag">CSS</li>
@@ -254,15 +256,16 @@ systems administration &middot; deployment &middot; homelab
 
     <hr>
 
-    <!-- ================= Projects ================= -->
-    <section class="section" id="projects" aria-labelledby="projects-title">
+    <!-- ================= Projekte ================= -->
+    <section class="section" id="projekte" aria-labelledby="projekte-title">
       <div class="container">
         <div class="section__head">
-          <p class="eyebrow">03 — Projects</p>
-          <h2 id="projects-title">Selected work</h2>
+          <p class="eyebrow">03 — Projekte</p>
+          <h2 id="projekte-title">Ausgewählte Arbeiten</h2>
           <p class="section__lead">
-            Some of it sits in private repositories, because it describes an
-            employer's infrastructure. Happy to describe it; code on request only.
+            Ein Teil davon liegt in privaten Repositories, weil dort die
+            Infrastruktur eines Arbeitgebers beschrieben ist. Beschreibung gerne,
+            Code nur auf Anfrage.
           </p>
         </div>
 
@@ -271,12 +274,13 @@ systems administration &middot; deployment &middot; homelab
           <article class="project reveal">
             <div class="project__head">
               <h3 class="project__name">it-toolkit</h3>
-              <span class="badge">private</span>
+              <span class="badge">privat</span>
             </div>
             <p class="project__text">
-              Nine separate repositories merged into one source of truth: Windows
-              setup, Office installer, AD tooling, deployment, monitoring and
-              Linux helpers behind a shared PowerShell module.
+              Neun einzelne Repositories zu einer Quelle der Wahrheit
+              zusammengeführt: Windows-Setup, Office-Installer, AD-Werkzeuge,
+              Deployment, Monitoring und Linux-Helfer hinter einem gemeinsamen
+              PowerShell-Modul.
             </p>
             <ul class="project__meta">
               <li>PowerShell</li>
@@ -288,12 +292,13 @@ systems administration &middot; deployment &middot; homelab
           <article class="project reveal">
             <div class="project__head">
               <h3 class="project__name">windows-setup</h3>
-              <span class="badge">private</span>
+              <span class="badge">privat</span>
             </div>
             <p class="project__text">
-              Unattended client setup: system tweaks, debloat, privacy defaults
-              and software rollout, driven by a profile JSON. Starts from a batch
-              file and runs through without asking anything.
+              Unbeaufsichtigtes Client-Setup: Systemtweaks, Debloat,
+              Datenschutz-Defaults und Softwareverteilung, gesteuert über ein
+              Profil-JSON. Startet aus einer Batch-Datei und läuft ohne
+              Rückfragen durch.
             </p>
             <ul class="project__meta">
               <li>PowerShell</li>
@@ -305,12 +310,13 @@ systems administration &middot; deployment &middot; homelab
           <article class="project reveal">
             <div class="project__head">
               <h3 class="project__name">ad-password-lifecycle</h3>
-              <span class="badge">private</span>
+              <span class="badge">privat</span>
             </div>
             <p class="project__text">
-              Moves forced AD password changes to the morning logon instead of
-              lunchtime, and defuses the ActiveSync lockout waves that otherwise
-              roll through the mailboxes afterwards.
+              Verschiebt erzwungene AD-Passwortwechsel auf die Morgenanmeldung
+              statt auf die Mittagszeit und entschärft die
+              ActiveSync-Sperrwellen, die sonst danach über die Postfächer
+              rollen.
             </p>
             <ul class="project__meta">
               <li>PowerShell</li>
@@ -324,27 +330,27 @@ systems administration &middot; deployment &middot; homelab
               <h3 class="project__name">
                 <a href="https://github.com/Da-Hauge/Behnke-Sprechstellen-Steuerung" rel="noopener noreferrer">Behnke-Sprechstellen-Steuerung</a>
               </h3>
-              <span class="badge badge--open">public</span>
+              <span class="badge badge--open">öffentlich</span>
             </div>
             <p class="project__text">
-              Driving Behnke SIP door intercoms from the command line instead of
-              the vendor's configuration tool.
+              Ansteuerung von Behnke-SIP-Sprechstellen — Türsprechanlagen aus der
+              Kommandozeile statt aus dem Herstellerkonfigurator.
             </p>
             <ul class="project__meta">
               <li>SIP</li>
-              <li>Building tech</li>
+              <li>Gebäudetechnik</li>
             </ul>
           </article>
 
           <article class="project reveal">
             <div class="project__head">
               <h3 class="project__name">pizero-kioskos</h3>
-              <span class="badge">private</span>
+              <span class="badge">privat</span>
             </div>
             <p class="project__text">
-              Image builder for Raspberry Pi Zero kiosk systems, plus a menu
-              display that a Pi Zero 2 W pushes out over HDMI. Small, silent, and
-              happy to run unattended for weeks.
+              Image-Builder für Raspberry-Pi-Zero-Kiosksysteme, plus ein
+              Speiseplan-Display, das ein Pi Zero 2 W über HDMI ausgibt. Klein,
+              lautlos, läuft wochenlang ohne Betreuung.
             </p>
             <ul class="project__meta">
               <li>Raspberry Pi</li>
@@ -356,17 +362,17 @@ systems administration &middot; deployment &middot; homelab
           <article class="project reveal">
             <div class="project__head">
               <h3 class="project__name">registration-app</h3>
-              <span class="badge">private</span>
+              <span class="badge">privat</span>
             </div>
             <p class="project__text">
-              Frontend, backend and database for the sign-ups to a volunteer fire
-              brigade's yearly seasonal campaign. Unpaid work, but with a proper
-              data model.
+              Frontend, Backend und Datenbank für die Anmeldungen zur jährlichen
+              Saisonaktion einer Freiwilligen Feuerwehr. Ehrenamt, aber mit
+              ordentlichem Datenmodell.
             </p>
             <ul class="project__meta">
               <li>Web</li>
               <li>MySQL</li>
-              <li>Volunteer</li>
+              <li>Ehrenamt</li>
             </ul>
           </article>
 
@@ -376,15 +382,15 @@ systems administration &middot; deployment &middot; homelab
 
     <hr>
 
-    <!-- ================= Contact ================= -->
-    <section class="section" id="contact" aria-labelledby="contact-title">
+    <!-- ================= Kontakt ================= -->
+    <section class="section" id="kontakt" aria-labelledby="kontakt-title">
       <div class="container">
         <div class="section__head">
-          <p class="eyebrow">04 — Contact</p>
-          <h2 id="contact-title">Getting in touch</h2>
+          <p class="eyebrow">04 — Kontakt</p>
+          <h2 id="kontakt-title">Kurzer Draht</h2>
           <p class="section__lead">
-            No contact form, on purpose. Email works just as well, and this way
-            the site does not have to process anything about you.
+            Kein Kontaktformular, absichtlich. Eine Mail erreicht mich genauso —
+            und diese Seite muss dafür nichts über Sie verarbeiten.
           </p>
         </div>
 
@@ -396,20 +402,20 @@ systems administration &middot; deployment &middot; homelab
             </span>
           </div>
           <div class="contact__item">
-            <span class="contact__label">Email</span>
+            <span class="contact__label">E-Mail</span>
             <span class="contact__value">
-              <a href="impressum.html">In the Impressum</a>
+              <a href="../impressum.html">Im Impressum</a>
             </span>
           </div>
         </div>
 
         <p class="note">
-          <strong>Privacy:</strong> this site loads no external fonts, no
-          analytics and no embedded third-party content. It stores exactly one
-          thing in your browser, and only if you use the language switch: which
-          language you picked. That is why there is no cookie banner. Details in
-          the <a href="datenschutz.html" lang="de">Datenschutzerklärung</a>
-          (German).
+          <strong>Datenschutz:</strong> Diese Seite lädt keine externen
+          Schriftarten, keine Analyse-Werkzeuge und keine eingebetteten Inhalte
+          Dritter. Sie speichert genau eine Sache im Browser, und nur wenn Sie
+          die Sprachumschaltung benutzen: welche Sprache Sie gewählt haben.
+          Deshalb gibt es hier kein Cookie-Banner. Details in der
+          <a href="../datenschutz.html">Datenschutzerklärung</a>.
         </p>
       </div>
     </section>
@@ -419,16 +425,16 @@ systems administration &middot; deployment &middot; homelab
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <p class="site-footer__note">&copy; 2026 haug-it.eu</p>
-      <nav aria-label="Legal">
+      <nav aria-label="Rechtliches">
         <ul>
-          <li><a href="impressum.html" lang="de">Impressum</a></li>
-          <li><a href="datenschutz.html" lang="de">Datenschutz</a></li>
-          <li><a href="https://github.com/Da-Hauge/Placeholder-Site" rel="noopener noreferrer">Source</a></li>
+          <li><a href="../impressum.html">Impressum</a></li>
+          <li><a href="../datenschutz.html">Datenschutz</a></li>
+          <li><a href="https://github.com/Da-Hauge/Placeholder-Site" rel="noopener noreferrer">Quellcode</a></li>
         </ul>
       </nav>
     </div>
   </footer>
 
-  <script src="js/main.js" defer></script>
+  <script src="../js/main.js" defer></script>
 </body>
 </html>

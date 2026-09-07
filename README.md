@@ -1,70 +1,96 @@
 # haug-it.eu
 
-Persönliche Website von Maximilian Haug. Statisches HTML und CSS, ausgeliefert
-über GitHub Pages. Kein Build, kein Framework, keine Abhängigkeiten.
+Static personal site behind `haug-it.eu`. Plain HTML and CSS on GitHub Pages —
+no build step, no framework, no dependencies.
 
-## Aufbau
+English is the default; German lives under `/de/`.
+
+## Layout
 
 ```
-index.html          Startseite (Hero, Schwerpunkte, Stack, Projekte, Kontakt)
-impressum.html      Pflichtangaben § 5 DDG        — Rechtstext noch TODO
-datenschutz.html    Art. 13 DSGVO                 — Rechtstext noch TODO
-legal.html          Weiterleitung -> impressum.html    (alte URL)
-privacy.html        Weiterleitung -> datenschutz.html  (alte URL)
-404.html            Fehlerseite für GitHub Pages
-favicon.svg         Icon, ein einziges SVG
-css/style.css       Gesamtes Stylesheet, Design-Tokens oben
-js/main.js          Nur Progressive Enhancement, optional
-docs/               Verarbeitungsübersicht, Auftragsverarbeiter, Security-Notizen
+index.html          Start page, English (primary)
+de/index.html       Start page, German
+impressum.html      Pflichtangaben § 5 DDG        — German, legal text still TODO
+datenschutz.html    Art. 13 DSGVO                 — German, legal text still TODO
+legal.html          redirect -> impressum.html        (old URL)
+privacy.html        redirect -> datenschutz.html      (old URL)
+404.html            error page for GitHub Pages
+favicon.svg         icon, a single SVG
+css/style.css       the whole stylesheet, design tokens at the top
+js/lang.js          language routing, loaded synchronously in <head>
+js/main.js          progressive enhancement, optional
+docs/               processing records, processors, security notes
 CNAME               haug-it.eu
 ```
 
-## Lokal ansehen
+The legal pages are German only, and deliberately so: they are the legally
+binding versions for a German operator. Both carry a short English summary at
+the top.
 
-Ein Doppelklick auf `index.html` genügt. Für realistischere Pfade:
+## Run it locally
+
+Double-clicking `index.html` mostly works, but the language routing and the
+absolute paths in `404.html` need a real server:
 
 ```bash
 python -m http.server 8000
 ```
 
-## Regeln für dieses Repository
+## How the language switch works
 
-Diese Seite ist bewusst so gebaut, dass sie ohne Einwilligung auskommt. Damit
-das so bleibt, gilt:
+1. First visit to `/`: `js/lang.js` reads `navigator.language`. German browser →
+   redirected once to `/de/`. Everything else stays on English.
+2. Clicking **EN/DE** stores the choice in `localStorage` under `haugit.lang`
+   and it wins over the browser setting from then on.
+3. `/de/` never redirects based on the browser language — only on an explicit
+   stored choice. That is what stops the two pages bouncing a visitor back and
+   forth.
 
-- **Nichts von Dritten nachladen.** Keine Google Fonts, kein CDN, keine
-  eingebetteten Karten, Videos oder Captchas. Schriftarten kommen aus dem
-  System-Stack, Icons sind Inline-SVG.
-- **Nichts auf dem Endgerät speichern.** Keine Cookies, kein `localStorage`,
-  kein `sessionStorage`, kein IndexedDB. Der Farbmodus folgt deshalb nur
-  `prefers-color-scheme` — ein Umschalter bräuchte Speicher.
-- **Kein Inline-CSS und kein Inline-JS.** Die CSP in jeder Seite verbietet
-  `unsafe-inline`. Ein `style="…"`-Attribut oder ein `onclick` bricht die Seite.
-- **Kein Formular.** Kontakt läuft über `mailto:`; die CSP setzt
+Without JavaScript the switch is still an ordinary link; it just does not
+persist. `lang.js` sits in `<head>` without `defer` so a German visitor never
+sees the English page flash first.
+
+## Rules for this repository
+
+The site is built so that it needs no consent banner. To keep it that way:
+
+- **Load nothing from third parties.** No Google Fonts, no CDN, no embedded
+  maps, videos or captchas. Fonts come from the system stack, icons are
+  inline SVG.
+- **Store nothing on the device except the language choice.** No cookies, no
+  `sessionStorage`, no IndexedDB. That one `localStorage` key is written only
+  on an explicit click and is covered by § 25 Abs. 2 Nr. 2 TDDDG. Anything
+  beyond it needs a fresh assessment — and probably a banner.
+- **No inline CSS and no inline JS.** The CSP on every page forbids
+  `unsafe-inline`. A `style="…"` attribute or an `onclick` breaks the page.
+- **No forms.** Contact runs through the address in the Impressum; the CSP sets
   `form-action 'none'`.
-- **Keine Abhängigkeiten.** Wenn doch eine nötig wird: Name, Version,
-  Downloads, letztes Release und Lizenz erst nennen, dann entscheiden.
+- **No dependencies.** If one becomes necessary: name, version, downloads, last
+  release and licence first, decision second.
+- **No personal data beyond what the law requires.** Name, postal address and
+  phone number appear in `impressum.html` and `datenschutz.html` only, because
+  § 5 DDG and Art. 13 DSGVO require them there. Do not repeat them on the start
+  page, in the footer, in meta tags or in `docs/`.
 
-Kommt eines dieser Dinge trotzdem dazu, sind im selben Pull Request
-`docs/verarbeitung.md`, `docs/auftragsverarbeiter.md` und `datenschutz.html`
-mitzuändern — und die Einwilligungspflicht nach § 25 TDDDG neu zu bewerten.
+If any of that changes, update `docs/verarbeitung.md`,
+`docs/auftragsverarbeiter.md` and `datenschutz.html` in the same pull request.
 
-## Offene Punkte
+## Open points
 
-- Impressum und Datenschutzerklärung enthalten `TODO`-Blöcke: die Rechtstexte
-  sind noch nicht juristisch geprüft.
-- Drittlandtransfer durch GitHub Pages (USA) ist ungeklärt, siehe
+- Impressum and Datenschutzerklärung contain `TODO` blocks — the legal texts
+  have not been reviewed by a lawyer.
+- Third-country transfer through GitHub Pages (US) is unresolved, see
   `docs/auftragsverarbeiter.md`.
-- HTTP-Sicherheitsheader lassen sich auf GitHub Pages nicht setzen, siehe
+- HTTP security headers cannot be set on GitHub Pages, see
   `docs/security-hinweise.md`.
 
-## Barrierefreiheit
+## Accessibility
 
-Ziel ist WCAG 2.1 AA: semantisches HTML, Skip-Link, eine `h1` pro Seite,
-sichtbarer Fokusindikator, Tastaturbedienbarkeit, `prefers-reduced-motion`.
-Automatisiert geprüft wurde bisher nichts — ein Durchlauf mit axe oder Lighthouse
-steht aus.
+Target is WCAG 2.1 AA: semantic HTML, skip link, one `h1` per page, visible
+focus indicator, keyboard operability, `prefers-reduced-motion`. Foreign-language
+fragments carry their own `lang` attribute. Nothing has been checked with an
+automated tool yet — an axe or Lighthouse run is still outstanding.
 
-## Sicherheit
+## Security
 
-Meldungen zu Sicherheitsproblemen: siehe [SECURITY.md](SECURITY.md).
+To report a security problem, see [SECURITY.md](SECURITY.md).

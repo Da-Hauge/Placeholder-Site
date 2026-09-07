@@ -1,10 +1,12 @@
 /* =========================================================================
    haug-it.eu — progressive enhancement only.
 
-   Deliberately does NOT: set cookies, touch localStorage / sessionStorage /
-   IndexedDB, load anything from a third party, or send a request anywhere.
-   The site is fully readable and navigable with JavaScript disabled; this
-   file only adds motion and nav highlighting on top.
+   Deliberately does NOT: set cookies, load anything from a third party, or
+   send a request anywhere. The only thing written to the device is the
+   language choice, and only when the visitor clicks the EN/DE switch —
+   see js/lang.js for the reasoning. The site is fully readable and
+   navigable with JavaScript disabled; this file only adds motion, nav
+   highlighting and language persistence on top.
    ========================================================================= */
 
 (function () {
@@ -12,6 +14,24 @@
 
   var root = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- 0. Remember an explicit language choice --------------------------
+     Without JS the switch still works as a plain link; it just does not
+     persist, and the browser language decides again on the next visit. */
+  var langLinks = document.querySelectorAll("[data-set-lang]");
+
+  Array.prototype.forEach.call(langLinks, function (link) {
+    link.addEventListener("click", function () {
+      var choice = link.getAttribute("data-set-lang");
+      if (choice !== "en" && choice !== "de") { return; }
+      try {
+        window.localStorage.setItem("haugit.lang", choice);
+      } catch (err) {
+        // Private mode or blocked site data: navigate anyway, just without
+        // remembering. Never block the click on a storage failure.
+      }
+    });
+  });
 
   /* ---- 1. Reveal on scroll ---------------------------------------------
      The hidden state is only switched on once we know IntersectionObserver
