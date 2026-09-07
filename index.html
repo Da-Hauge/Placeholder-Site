@@ -1,32 +1,421 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haug-IT Testseite</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- A02: GitHub Pages cannot set response headers, so the policy is declared
+       here. No 'unsafe-inline', no wildcards. frame-ancestors is not supported
+       in a meta tag - see docs/security-hinweise.md. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Maximilian Haug — IT-Administration &amp; Automatisierung | haug-it.eu</title>
+  <meta name="description" content="Maximilian Haug aus Schwabhausen: Windows-Client-Deployment, Active Directory, Linux, Proxmox und Monitoring. Skripte statt Klickstrecken.">
+  <link rel="canonical" href="https://haug-it.eu/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Willkommen bei Haug-IT!</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="memes.html">Memes</a>
-            <a href="contact.html">Contact</a>
-            <a href="legal.html">Legal Notice</a>
-            <a href="privacy.html">Privacy Policy</a>
-        </nav>
-    </header>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-    <main>
-        <h2>Testseite für GitHub Pages</h2>
-        <p>Dies ist nur eine Platzhalterseite. Nichts funktioniert wirklich, aber es sieht cool aus 😎</p>
-        <img src="img/meme1.jpg" alt="Meme" width="400">
-    </main>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__sigil">~/</span><span>haug-it</span><span class="brand__dim">.eu</span>
+      </a>
+      <nav class="nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#schwerpunkte">Schwerpunkte</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#projekte">Projekte</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <footer>
-        <p>&copy; 2025 Haug-IT</p>
-    </footer>
+  <main id="main">
+
+    <!-- ================= Hero ================= -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="hero__status">
+            <span class="hero__dot" aria-hidden="true"></span>
+            Schwabhausen, Bayern &middot; DE
+          </p>
+
+          <h1 class="hero__name">Maximilian Haug</h1>
+          <p class="hero__role">IT-Administration &amp; Automatisierung</p>
+
+          <p class="hero__text">
+            Ich baue die unsichtbare Hälfte der IT: Windows-Clients, die sich selbst
+            aufsetzen, Active&nbsp;Directory, das nicht um 11&nbsp;Uhr vormittags alle
+            Passwörter gleichzeitig ablaufen lässt, und Linux-Container, die morgens
+            noch laufen. Wenn ich etwas zweimal klicken muss, schreibe ich ein Skript
+            dafür.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#projekte">
+              Projekte ansehen
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#kontakt">Kontakt aufnehmen</a>
+          </div>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span class="terminal__lights" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span class="terminal__title">pwsh — haug-it.eu</span>
+          </div>
+          <pre class="terminal__body"><code><span class="terminal__prompt">maximilian@haug-it:~$</span> <span class="terminal__cmd">whoami</span>
+Systemadministration &middot; Deployment &middot; Homelab
+
+<span class="terminal__prompt">maximilian@haug-it:~$</span> <span class="terminal__cmd">Get-Content .\stack.txt</span>
+<span class="terminal__key">windows</span>   Windows 11, Intune-freies Deployment
+<span class="terminal__key">directory</span> Active Directory, GPO, ADSync
+<span class="terminal__key">shell</span>     PowerShell 5.1 &amp; 7, Bash
+<span class="terminal__key">platform</span>  Proxmox, LXC, Docker, Debian
+<span class="terminal__key">monitor</span>   PRTG, InfluxDB, Speedtest-Sensorik
+
+<span class="terminal__prompt">maximilian@haug-it:~$</span> <span class="terminal__cmd">./deploy.ps1 -Unattended</span>
+[ok] 0 Klicks, 0 Überraschungen
+
+<span class="terminal__prompt">maximilian@haug-it:~$</span> <span class="terminal__caret" aria-hidden="true"></span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ================= Schwerpunkte ================= -->
+    <section class="section" id="schwerpunkte" aria-labelledby="schwerpunkte-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">01 — Schwerpunkte</p>
+          <h2 id="schwerpunkte-title">Wo ich tatsächlich Zeit verbringe</h2>
+          <p class="section__lead">
+            Vier Bereiche, in denen aus wiederkehrender Handarbeit reproduzierbare
+            Abläufe geworden sind.
+          </p>
+        </div>
+
+        <div class="grid grid--4">
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+            </span>
+            <h3 class="card__title">Client-Deployment</h3>
+            <p class="card__text">
+              Windows-11-Installationen, die ohne Zuschauer durchlaufen: Antwortdateien,
+              Debloat, Datenschutz-Defaults und Softwareverteilung in einem Durchgang.
+            </p>
+            <ul class="card__list">
+              <li>autounattend.xml</li>
+              <li>winget-Paketlisten</li>
+              <li>Office Deployment Tool</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="12" cy="5" r="3"/><path d="M12 8v3"/><path d="M5 21v-3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M12 11v5"/></svg>
+            </span>
+            <h3 class="card__title">Active Directory</h3>
+            <p class="card__text">
+              Domain-Beitritt, Gruppenrichtlinien und vor allem der Passwort-Lebenszyklus:
+              Ablauf am Morgen statt mitten im Betrieb, damit die Hotline ruhig bleibt.
+            </p>
+            <ul class="card__list">
+              <li>Domain Join &amp; Rename</li>
+              <li>Passwort-Lifecycle</li>
+              <li>Logon-Reporting</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 8h.01"/><path d="M7 17h.01"/></svg>
+            </span>
+            <h3 class="card__title">Linux &amp; Container</h3>
+            <p class="card__text">
+              Proxmox als Unterbau, LXC und Docker darüber. Compose-Stacks, die
+              versioniert im Repository liegen statt in irgendeinem Terminal-Verlauf.
+            </p>
+            <ul class="card__list">
+              <li>Proxmox &amp; LXC</li>
+              <li>Docker Compose</li>
+              <li>VS Code Tunnel</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+            </span>
+            <h3 class="card__title">Monitoring</h3>
+            <p class="card__text">
+              Eigene PRTG-Sensoren, wo die Standardsensoren aufhören — zum Beispiel
+              Ookla-Speedtests, die als Zeitreihe landen statt als Bauchgefühl.
+            </p>
+            <ul class="card__list">
+              <li>PRTG Custom Sensors</li>
+              <li>InfluxDB-Zeitreihen</li>
+              <li>Geplante Messläufe</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Stack ================= -->
+    <section class="section" id="stack" aria-labelledby="stack-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">02 — Stack</p>
+          <h2 id="stack-title">Werkzeugkasten</h2>
+          <p class="section__lead">
+            Nichts davon ist Selbstzweck — jedes Werkzeug steht hier, weil damit
+            etwas im Alltag produktiv läuft.
+          </p>
+        </div>
+
+        <div class="stack-group">
+          <h3 class="stack-group__label">Windows &amp; Directory</h3>
+          <ul class="tags">
+            <li class="tag">PowerShell</li>
+            <li class="tag">Windows 11</li>
+            <li class="tag">Active Directory</li>
+            <li class="tag">Gruppenrichtlinien</li>
+            <li class="tag">winget</li>
+            <li class="tag">Office Deployment Tool</li>
+            <li class="tag">autounattend</li>
+          </ul>
+        </div>
+
+        <div class="stack-group">
+          <h3 class="stack-group__label">Linux &amp; Plattform</h3>
+          <ul class="tags">
+            <li class="tag">Debian</li>
+            <li class="tag">Proxmox VE</li>
+            <li class="tag">LXC</li>
+            <li class="tag">Docker Compose</li>
+            <li class="tag">Bash</li>
+            <li class="tag">systemd</li>
+            <li class="tag">Raspberry&nbsp;Pi</li>
+          </ul>
+        </div>
+
+        <div class="stack-group">
+          <h3 class="stack-group__label">Monitoring &amp; Betrieb</h3>
+          <ul class="tags">
+            <li class="tag">PRTG</li>
+            <li class="tag">InfluxDB</li>
+            <li class="tag">Veeam Agent</li>
+            <li class="tag">Git</li>
+            <li class="tag">GitHub Actions</li>
+          </ul>
+        </div>
+
+        <div class="stack-group">
+          <h3 class="stack-group__label">Web &amp; Sonstiges</h3>
+          <ul class="tags">
+            <li class="tag">HTML</li>
+            <li class="tag">CSS</li>
+            <li class="tag">JavaScript</li>
+            <li class="tag">MySQL</li>
+            <li class="tag">Hugo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ================= Projekte ================= -->
+    <section class="section" id="projekte" aria-labelledby="projekte-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">03 — Projekte</p>
+          <h2 id="projekte-title">Ausgewählte Arbeiten</h2>
+          <p class="section__lead">
+            Ein Teil davon liegt in privaten Repositories, weil dort Infrastruktur
+            eines Arbeitgebers beschrieben ist. Beschreibung gerne, Code nur auf Anfrage.
+          </p>
+        </div>
+
+        <div class="grid">
+
+          <article class="project reveal">
+            <div class="project__head">
+              <h3 class="project__name">it-toolkit</h3>
+              <span class="badge">privat</span>
+            </div>
+            <p class="project__text">
+              Zusammenführung von neun einzelnen Repositories zu einer Quelle der
+              Wahrheit: Windows-Setup, Office-Installer, AD-Werkzeuge, Deployment,
+              Monitoring und Linux-Helfer hinter einem gemeinsamen PowerShell-Modul.
+            </p>
+            <ul class="project__meta">
+              <li>PowerShell</li>
+              <li>Active Directory</li>
+              <li>winget</li>
+            </ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__head">
+              <h3 class="project__name">windows-setup</h3>
+              <span class="badge">privat</span>
+            </div>
+            <p class="project__text">
+              Unbeaufsichtigtes Client-Setup: Systemtweaks, Debloat, Datenschutz-Defaults
+              und Softwareverteilung, gesteuert über ein Profil-JSON. Startet aus einer
+              Batch-Datei und läuft ohne Rückfragen durch.
+            </p>
+            <ul class="project__meta">
+              <li>PowerShell</li>
+              <li>Windows 11</li>
+              <li>Unattended</li>
+            </ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__head">
+              <h3 class="project__name">ad-password-lifecycle</h3>
+              <span class="badge">privat</span>
+            </div>
+            <p class="project__text">
+              Verschiebt erzwungene AD-Passwortwechsel auf die Morgenanmeldung statt
+              auf die Mittagszeit und entschärft die ActiveSync-Sperrwellen, die sonst
+              danach über die Postfächer rollen.
+            </p>
+            <ul class="project__meta">
+              <li>PowerShell</li>
+              <li>Active Directory</li>
+              <li>Exchange</li>
+            </ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__head">
+              <h3 class="project__name">
+                <a href="https://github.com/Da-Hauge/Behnke-Sprechstellen-Steuerung" rel="noopener noreferrer">Behnke-Sprechstellen-Steuerung</a>
+              </h3>
+              <span class="badge badge--open">öffentlich</span>
+            </div>
+            <p class="project__text">
+              Ansteuerung von Behnke-SIP-Sprechstellen — Türsprechanlagen aus der
+              Kommandozeile statt aus dem Herstellerkonfigurator.
+            </p>
+            <ul class="project__meta">
+              <li>SIP</li>
+              <li>Gebäudetechnik</li>
+            </ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__head">
+              <h3 class="project__name">pizero-kioskos</h3>
+              <span class="badge">privat</span>
+            </div>
+            <p class="project__text">
+              Image-Builder für Raspberry-Pi-Zero-Kiosksysteme, plus ein
+              Speiseplan-Display, das ein Pi Zero 2 W über HDMI ausgibt. Klein,
+              lautlos, läuft wochenlang ohne Betreuung.
+            </p>
+            <ul class="project__meta">
+              <li>Raspberry Pi</li>
+              <li>Linux</li>
+              <li>Kiosk</li>
+            </ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__head">
+              <h3 class="project__name">nikolaus-christbaum</h3>
+              <span class="badge">privat</span>
+            </div>
+            <p class="project__text">
+              Frontend, Backend und Datenbank für die Anmeldungen zur jährlichen
+              Nikolaus- und Christbaumaktion der Freiwilligen Feuerwehr Schwabhausen.
+              Ehrenamt, aber mit ordentlichem Datenmodell.
+            </p>
+            <ul class="project__meta">
+              <li>Web</li>
+              <li>MySQL</li>
+              <li>Ehrenamt</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ================= Kontakt ================= -->
+    <section class="section" id="kontakt" aria-labelledby="kontakt-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">04 — Kontakt</p>
+          <h2 id="kontakt-title">Kurzer Draht</h2>
+          <p class="section__lead">
+            Kein Kontaktformular, absichtlich. Eine Mail erreicht mich genauso — und
+            diese Seite muss dafür keine Daten von Ihnen verarbeiten.
+          </p>
+        </div>
+
+        <div class="contact">
+          <div class="contact__item">
+            <span class="contact__label">E-Mail</span>
+            <span class="contact__value">
+              <a href="mailto:maximilian@haug-it.eu">maximilian@haug-it.eu</a>
+            </span>
+          </div>
+          <div class="contact__item">
+            <span class="contact__label">GitHub</span>
+            <span class="contact__value">
+              <a href="https://github.com/Da-Hauge" rel="noopener noreferrer">@Da-Hauge</a>
+            </span>
+          </div>
+          <div class="contact__item">
+            <span class="contact__label">Standort</span>
+            <span class="contact__value">85247 Schwabhausen</span>
+          </div>
+        </div>
+
+        <p class="note">
+          <strong>Datenschutz:</strong> Diese Seite lädt keine externen Schriftarten,
+          keine Analyse-Werkzeuge und keine eingebetteten Inhalte Dritter. Es werden
+          keine Cookies gesetzt und nichts im Browser gespeichert — deshalb gibt es
+          hier auch kein Cookie-Banner. Details in der
+          <a href="datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__note">&copy; 2026 Maximilian Haug — haug-it.eu</p>
+      <nav aria-label="Rechtliches">
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="https://github.com/Da-Hauge/Placeholder-Site" rel="noopener noreferrer">Quellcode</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>
