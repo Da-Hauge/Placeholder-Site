@@ -1,0 +1,32 @@
+# Secrets — never commit any of this (CLAUDE.md Abschnitt 1 und 9)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+credentials*
+secrets*
+.aws/
+.ssh/
+acme.json
+
+# Dumps und Backups
+*.sql
+*.dump
+*.bak
+*.log
+
+# OS- und Editor-Kram
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Lokale Werkzeuge
+node_modules/
+.cache/
