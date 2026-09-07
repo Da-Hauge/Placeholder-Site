@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+
+  <title>404 — page not found | haug-it.eu</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/">
+        <span class="brand__sigil">~/</span><span>haug-it</span><span class="brand__dim">.eu</span>
+      </a>
+
+      <div class="header__end">
+        <nav class="nav" aria-label="Main">
+          <ul>
+            <li><a href="/">Start</a></li>
+            <li><a href="/impressum.html" lang="de">Impressum</a></li>
+            <li><a href="/datenschutz.html" lang="de">Datenschutz</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Language">
+          <ul class="lang-switch">
+            <li><a href="/" data-set-lang="en" lang="en">EN</a></li>
+            <li><a href="/de/" data-set-lang="de" lang="de">DE</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section error-page">
+      <div class="container">
+        <p class="error-page__code">404</p>
+        <h1>Path not found</h1>
+        <p class="section__lead">
+          This address does not exist here — probably renamed, possibly never
+          there in the first place.
+        </p>
+        <p class="section__lead" lang="de">
+          Diese Adresse gibt es hier nicht — vermutlich umbenannt, vielleicht
+          nie existiert.
+        </p>
+        <div class="error-page__actions">
+          <a class="btn btn--primary" href="/">Back to the start page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__note">&copy; 2026 haug-it.eu</p>
+      <nav aria-label="Legal">
+        <ul>
+          <li><a href="/impressum.html" lang="de">Impressum</a></li>
+          <li><a href="/datenschutz.html" lang="de">Datenschutz</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
