@@ -70,7 +70,9 @@ The site is built so that it needs no consent banner. To keep it that way:
 - **No personal data beyond what the law requires.** Name, postal address and
   phone number appear in `impressum.html` and `datenschutz.html` only, because
   § 5 DDG and Art. 13 DSGVO require them there. Do not repeat them on the start
-  page, in the footer, in meta tags or in `docs/`.
+  page, in the footer, in meta tags or in `docs/`. The contact address is the
+  one exception: it is also linked as a `mailto:` on both start pages, on
+  purpose, so that getting in touch does not take a detour.
 
 If any of that changes, update `docs/verarbeitung.md`,
 `docs/auftragsverarbeiter.md` and `datenschutz.html` in the same pull request.
