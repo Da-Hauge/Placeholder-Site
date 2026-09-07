@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Privacy Policy</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'self'; script-src 'none'; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Weiterleitung der alten URL. GitHub Pages kann keinen 301 senden, daher
+       ein sofortiger Meta-Refresh (0 s ist nach WCAG 2.2.1 zulässig) plus ein
+       sichtbarer Link als Rückfallebene. -->
+  <meta http-equiv="refresh" content="0; url=datenschutz.html">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://haug-it.eu/datenschutz.html">
+  <title>Datenschutz — Weiterleitung | haug-it.eu</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Privacy Policy</h1>
-    <p>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website verarbeitet keine personenbezogenen Daten und verwendet keine Cookies.</p>
-    <h2>Responsible</h2>
-    <p>
-        Maximilian Haug<br>
-        Ludwig-Thoma-Str. 23c<br>
-        85247 Schwabhausen<br>
-        Deutschland<br>
-        E-Mail: maximilian@huag-it.eu
-    </p>
-    <h2>Your Rights</h2>
-    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Bei Fragen wenden Sie sich bitte an die oben genannte Kontaktadresse.</p>
+  <main id="main">
+    <section class="section error-page">
+      <div class="container">
+        <h1>Seite umgezogen</h1>
+        <p>Die Datenschutzerklärung liegt jetzt unter <code>/datenschutz.html</code>.</p>
+        <div class="error-page__actions">
+          <a class="btn btn--primary" href="datenschutz.html">Zur Datenschutzerklärung</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
 </html>
