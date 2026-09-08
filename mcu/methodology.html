@@ -120,9 +120,42 @@
                 <td>General release-history knowledge</td>
                 <td><strong>Not individually re-verified against a primary source in this data pass.</strong> Treat exact days-of-month there as approximate; the year and general reception are reliable</td>
               </tr>
+              <tr>
+                <td>Studio (the "Studio" filter)</td>
+                <td>Derived, not stored per title: every core-list title is "Marvel Studios"; every non-MCU title's studio comes from which secondary group it's in (Sony/Fox/Blade/Marvel Television)</td>
+                <td>Exact by construction — not a lookup that can drift out of date</td>
+              </tr>
+              <tr>
+                <td>Platform badge</td>
+                <td>Derived from category and studio, not a live check: Marvel Studios series/specials/one-shots and the Netflix-era Marvel shows are marked Disney+; other core films are marked Disney+ except <em>The Incredible Hulk</em> (missing from Disney+ over separate music/character rights); everything else is marked "digital rental/purchase"; unreleased titles are marked "theatrical (upcoming)"</td>
+                <td><strong>Approximate, not live availability.</strong> Streaming rights move around — treat this as "where you'd typically expect to find it," not a guarantee</td>
+              </tr>
+              <tr>
+                <td>Trivia and "what you'd miss" spoiler notes</td>
+                <td>Hand-written for this tracker (js/mcu-extras.js), from general knowledge of the films/shows — not copied from any single source</td>
+                <td>Covers only "essential" and "recommended" tier <em>core</em> titles (45 of them). Everything else intentionally has none yet; the detail view just omits that section</td>
+              </tr>
+              <tr>
+                <td>Per-episode timeline placement</td>
+                <td>Hand-modelled point-of-divergence estimates for one title so far: <em>What If...?</em> Season 1, where each episode really is a different branch off the main timeline</td>
+                <td><strong>Illustrative, not a claimed canonical position</strong> — alternate-universe episodes don't have one true place on the main timeline. Turn on "Split series into episodes" while sorted by "Story timeline" to see it</td>
+              </tr>
             </tbody>
           </table>
         </div>
+
+        <h2>Dashboard</h2>
+        <p>
+          The <a href="dashboard.html">dashboard</a> reads the exact same
+          browser-local progress data the tracker writes — nothing new is
+          collected for it. "Time watched" for an in-progress film uses
+          whatever minute you last set on its progress slider; for a
+          part-watched series it's estimated proportionally from how many
+          episodes are marked watched. The "watched over time" chart groups
+          your watch-marks by calendar day and only exists once you've
+          marked something watched — see the tracker's Settings for how to
+          reset it.
+        </p>
 
         <h2>What "importance tier" means</h2>
         <p>

@@ -16,7 +16,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <title>MCU Tracker | haug-it.eu</title>
-  <meta name="description" content="Track every Marvel Cinematic Universe film and series — sort by release or story order, filter by category or sub-saga, mark what you have watched, and keep your own progress.">
+  <meta name="description" content="Track every Marvel Cinematic Universe film and series — sort by release or story order, filter by category, universe and studio, mark what you have watched, and see your own dashboard.">
   <link rel="canonical" href="https://haug-it.eu/mcu/">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../css/brand.css">
@@ -38,6 +38,7 @@
           <ul>
             <li><a href="../">Home</a></li>
             <li><a href="./" aria-current="page">MCU Tracker</a></li>
+            <li><a href="dashboard.html" data-i18n="dashboardLink">Dashboard</a></li>
           </ul>
         </nav>
 
@@ -86,7 +87,7 @@
           <p class="mcu-summary__next" id="mcu-progress-next"></p>
         </section>
 
-        <!-- ===== Toolbar: search, order, save ===== -->
+        <!-- ===== Toolbar: search, order, group, view, save ===== -->
         <section class="mcu-toolbar" aria-label="Search and data controls">
           <div class="mcu-field">
             <label for="mcu-search" data-i18n="searchLabel">Search</label>
@@ -104,7 +105,18 @@
             </select>
           </div>
 
+          <div class="mcu-field">
+            <label for="mcu-groupby" data-i18n="groupByLabel">Group by</label>
+            <select id="mcu-groupby">
+              <option value="none" data-i18n="groupByNone">No grouping</option>
+              <option value="phase" data-i18n="groupByPhase">Phase / saga</option>
+              <option value="studio" data-i18n="groupByStudio">Studio</option>
+              <option value="category" data-i18n="groupByCategory">Category</option>
+            </select>
+          </div>
+
           <div class="mcu-toolbar__actions">
+            <button type="button" class="btn btn--ghost" id="mcu-view-toggle">Compact view</button>
             <button type="button" class="btn btn--ghost" id="mcu-export" data-i18n="exportBtn">Export progress</button>
             <label class="btn btn--ghost mcu-file-btn">
               <span data-i18n="importBtn">Import progress</span>
@@ -119,15 +131,9 @@
         <section class="mcu-filters" aria-labelledby="mcu-filters-title">
           <h2 id="mcu-filters-title" class="visually-hidden" data-i18n="filtersHeading">Filters</h2>
 
-          <fieldset class="mcu-filter-group">
-            <legend data-i18n="categoryLegend">Category</legend>
-            <div class="mcu-checks" id="mcu-category-filters"></div>
-          </fieldset>
-
-          <fieldset class="mcu-filter-group">
-            <legend data-i18n="partLegend">Part of the universe</legend>
-            <div class="mcu-checks" id="mcu-part-filters"></div>
-          </fieldset>
+          <div id="mcu-category-filters"></div>
+          <div id="mcu-part-filters"></div>
+          <div id="mcu-studio-filters"></div>
 
           <fieldset class="mcu-filter-group">
             <legend data-i18n="optionsLegend">Options</legend>
@@ -149,13 +155,14 @@
                 <span data-i18n="optUnwatchedOnly">Unwatched only</span>
               </label>
             </div>
+            <p class="mcu-help" id="mcu-split-help"></p>
           </fieldset>
         </section>
 
         <p class="mcu-results-count" id="mcu-results-count" role="status" aria-live="polite"></p>
 
-        <!-- ===== Results ===== -->
-        <ol class="mcu-list" id="mcu-list"></ol>
+        <!-- ===== Results (JS renders one <ol> or several grouped <section><ol>) ===== -->
+        <div id="mcu-list-host"></div>
 
         <p class="mcu-empty" id="mcu-empty" hidden data-i18n="emptyState">Nothing matches these filters.</p>
 
@@ -165,6 +172,17 @@
           <a href="methodology.html" data-i18n="aboutDataLink">methodology notes</a>.
           <span id="mcu-data-asof"></span>
         </p>
+      </div>
+    </div>
+
+    <!-- ===== Detail dialog ===== -->
+    <div class="mcu-dialog-backdrop" id="mcu-detail-backdrop" hidden>
+      <div class="mcu-dialog" role="dialog" aria-modal="true" aria-labelledby="mcu-detail-title">
+        <div class="mcu-dialog__head">
+          <h2 id="mcu-detail-title"></h2>
+          <button type="button" class="mcu-dialog__close" id="mcu-detail-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="mcu-dialog__body" id="mcu-detail-body"></div>
       </div>
     </div>
 
@@ -216,6 +234,7 @@
       <nav aria-label="Legal">
         <ul>
           <li><a href="../">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
           <li><a href="methodology.html">Data &amp; methodology</a></li>
           <li><a href="../impressum.html" lang="de">Impressum</a></li>
           <li><a href="../privacy-policy.html">Privacy</a></li>
@@ -226,7 +245,9 @@
 
   <script src="../js/main.js" defer></script>
   <script src="../js/mcu-data.js" defer></script>
+  <script src="../js/mcu-extras.js" defer></script>
   <script src="../js/mcu-i18n.js" defer></script>
+  <script src="../js/mcu-shared.js" defer></script>
   <script src="../js/mcu.js" defer></script>
 </body>
 </html>

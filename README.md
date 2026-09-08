@@ -23,10 +23,14 @@ css/mcu.css         components for /mcu/ only
 js/theme.js         theme resolution, loaded synchronously in <head>
 js/lang.js          language routing, loaded synchronously in <head>
 js/main.js          progressive enhancement, optional
-js/mcu.js           MCU Tracker app logic (filtering, sorting, progress, export/import, optional TMDb sync)
+js/mcu.js           MCU Tracker app logic (filtering, sorting, progress, detail view, export/import, optional TMDb sync)
+js/mcu-shared.js    state shape + storage helpers shared by mcu.js and mcu-dashboard.js
+js/mcu-dashboard.js MCU Tracker dashboard: stats + hand-rolled inline-SVG charts (no charting library)
 js/mcu-data.js      MCU Tracker dataset — see mcu/methodology.html for sources
+js/mcu-extras.js    MCU Tracker trivia + spoiler-gated "what you'd miss" notes (essential/recommended core titles only)
 js/mcu-i18n.js      MCU Tracker EN/DE strings
 mcu/                MCU Tracker subpage — track every MCU film/series, own watch progress, offline by default
+mcu/dashboard.html  MCU Tracker dashboard subpage
 docs/               processing records, processors, security notes
 CNAME               haug-it.eu
 ```
