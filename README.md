@@ -11,21 +11,58 @@ English is the default; German lives under `/de/`.
 index.html          Start page, English (primary)
 de/index.html       Start page, German
 impressum.html      Pflichtangaben § 5 DDG        — German, legal text still TODO
-datenschutz.html    Art. 13 DSGVO                 — German, legal text still TODO
+datenschutz.html    Art. 13 DSGVO                 — German, BINDING version, TODO
+privacy-policy.html English translation of the above — informational only
 legal.html          redirect -> impressum.html        (old URL)
 privacy.html        redirect -> datenschutz.html      (old URL)
 404.html            error page for GitHub Pages
 favicon.svg         icon, a single SVG
-css/style.css       the whole stylesheet, design tokens at the top
+css/brand.css       VENDORED brand tokens - see github.com/Da-Hauge/haug-it-brand
+css/style.css       components; maps the brand tokens onto short local names
+js/theme.js         theme resolution, loaded synchronously in <head>
 js/lang.js          language routing, loaded synchronously in <head>
 js/main.js          progressive enhancement, optional
 docs/               processing records, processors, security notes
 CNAME               haug-it.eu
 ```
 
-The legal pages are German only, and deliberately so: they are the legally
-binding versions for a German operator. Both carry a short English summary at
-the top.
+The Impressum is German only — that is the legally binding version for a German
+operator, and it carries a short English summary at the top. The privacy notice
+exists in both languages, but `datenschutz.html` is the binding one and
+`privacy-policy.html` says so at the top. **Change them together or not at all.**
+
+## Brand tokens
+
+Colour, type, shape and motion come from
+[`Da-Hauge/haug-it-brand`](https://github.com/Da-Hauge/haug-it-brand).
+`css/brand.css` is a **vendored copy** of `tokens/brand.css` from that repo,
+currently v1.0.0.
+
+It is copied rather than hotlinked on purpose: fetching it from GitHub at
+runtime would be a third-party request from the visitor's browser, which drags
+in § 25 TDDDG and Art. 44 DSGVO. Do not edit `css/brand.css` here — change it in
+the brand repo and re-copy:
+
+```bash
+cp ../haug-it-brand/tokens/brand.css css/brand.css
+cp ../haug-it-brand/logo/mark.svg    favicon.svg
+```
+
+`css/style.css` maps the `--hb-*` tokens onto short local names in one block at
+the top and never contains a literal colour (the print block excepted).
+
+## How the theme works
+
+Three modes: **auto** (follow the OS, the default), **light**, **dark**. The
+toggle in the header cycles through them.
+
+- `js/theme.js` runs synchronously in `<head>` on every page, so a stored theme
+  never flashes the wrong colours.
+- The choice is stored in `localStorage` under `haugit.theme`. Choosing *auto*
+  **removes** the key rather than storing the word `auto`, so a visitor who
+  returns to auto leaves nothing behind.
+- The button is hidden until JS confirms it can work — without JS it could not
+  do anything, so it is not shown.
 
 ## Run it locally
 
@@ -57,10 +94,13 @@ The site is built so that it needs no consent banner. To keep it that way:
 - **Load nothing from third parties.** No Google Fonts, no CDN, no embedded
   maps, videos or captchas. Fonts come from the system stack, icons are
   inline SVG.
-- **Store nothing on the device except the language choice.** No cookies, no
-  `sessionStorage`, no IndexedDB. That one `localStorage` key is written only
-  on an explicit click and is covered by § 25 Abs. 2 Nr. 2 TDDDG. Anything
-  beyond it needs a fresh assessment — and probably a banner.
+- **Store nothing on the device except the language and theme choices.** No
+  cookies, no `sessionStorage`, no IndexedDB. Those two `localStorage` keys
+  (`haugit.lang`, `haugit.theme`) are written only on an explicit click and are
+  covered by § 25 Abs. 2 Nr. 2 TDDDG. A third key needs a fresh assessment —
+  and probably a banner.
+- **Every stylesheet is local.** `brand.css` before `style.css`, both from
+  `'self'`. Never add a `<link>` to a font service or a CDN.
 - **No inline CSS and no inline JS.** The CSP on every page forbids
   `unsafe-inline`. A `style="…"` attribute or an `onclick` breaks the page.
 - **No forms.** Contact runs through the address in the Impressum; the CSP sets
@@ -75,12 +115,13 @@ The site is built so that it needs no consent banner. To keep it that way:
   purpose, so that getting in touch does not take a detour.
 
 If any of that changes, update `docs/verarbeitung.md`,
-`docs/auftragsverarbeiter.md` and `datenschutz.html` in the same pull request.
+`docs/auftragsverarbeiter.md`, `datenschutz.html` AND `privacy-policy.html`
+in the same pull request.
 
 ## Open points
 
-- Impressum and Datenschutzerklärung contain `TODO` blocks — the legal texts
-  have not been reviewed by a lawyer.
+- Impressum, Datenschutzerklärung and the English privacy policy contain
+  `TODO` blocks — the legal texts have not been reviewed by a lawyer.
 - Third-country transfer through GitHub Pages (US) is unresolved, see
   `docs/auftragsverarbeiter.md`.
 - HTTP security headers cannot be set on GitHub Pages, see
