@@ -1,84 +1,59 @@
 /* =========================================================================
    haug-it.eu — stylesheet
 
+   Colour, type, shape and motion come from css/brand.css, which is a
+   vendored copy of the haug-it brand tokens. That file must be loaded
+   first. This file only maps those tokens onto short local names and
+   builds the components.
+
    No external resources. No web fonts, no CDN, no trackers. Nothing is
-   loaded from a third party and nothing is written to or read from the
-   visitor's device, so § 25 TDDDG is not triggered and no consent banner
-   is required. Colour theme follows the OS setting only — deliberately no
-   toggle, because a toggle would need storage.
+   loaded from a third party. The only things written to the device are the
+   language and theme choices, and only when the visitor actually operates
+   the relevant control — see js/lang.js and js/theme.js.
    ========================================================================= */
 
-/* ---------- 1. Design tokens (dark first) ------------------------------- */
+/* ---------- 1. Brand tokens -> local aliases ----------------------------- */
+/* The indirection is live: brand.css swaps the --hb-* values per theme and
+   every alias below follows automatically. Do not put literal colours here. */
 
 :root {
-  color-scheme: dark light;
+  --bg:            var(--hb-color-bg);
+  --bg-elevated:   var(--hb-color-bg-elevated);
+  --surface:       var(--hb-color-surface);
+  --surface-hi:    var(--hb-color-surface-raised);
+  --border:        var(--hb-color-border);
+  --border-hi:     var(--hb-color-border-strong);
+  --border-ui:     var(--hb-color-border-interactive);
 
-  --bg:            #0a0e13;
-  --bg-elevated:   #10161f;
-  --surface:       #121a24;
-  --surface-hi:    #18222f;
-  --border:        #212d3c;
-  --border-hi:     #2e3d50;
+  --text:          var(--hb-color-text);
+  --text-muted:    var(--hb-color-text-muted);
+  --text-faint:    var(--hb-color-text-faint);
 
-  --text:          #e8eef5;
-  --text-muted:    #9aabbd;
-  --text-faint:    #8496a9;
+  --accent:        var(--hb-color-accent);
+  --accent-hi:     var(--hb-color-accent-hover);
+  --accent-dim:    var(--hb-color-accent-soft);
+  --accent-line:   var(--hb-color-accent-line);
+  --on-accent:     var(--hb-color-on-accent);
 
-  --accent:        #3ad6a8;
-  --accent-hi:     #6ee7c2;
-  --accent-dim:    rgba(58, 214, 168, 0.12);
-  --accent-line:   rgba(58, 214, 168, 0.35);
+  --accent-2:      var(--hb-color-link);
+  --accent-2-dim:  var(--hb-color-link-soft);
 
-  --accent-2:      #6fb3ff;
-  --accent-2-dim:  rgba(111, 179, 255, 0.12);
+  --focus:         var(--hb-color-focus);
 
-  --focus:         #ffd166;
-  --on-accent:     #05100c;
+  --font-sans: var(--hb-font-sans);
+  --font-mono: var(--hb-font-mono);
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", "Cascadia Mono",
-               "Segoe UI Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --step--1: var(--hb-text-xs);
+  --step-0:  var(--hb-text-sm);
+  --step-1:  var(--hb-text-md);
+  --step-2:  var(--hb-text-lg);
+  --step-3:  var(--hb-text-xl);
 
-  --step--1: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
-  --step-0:  clamp(1.00rem, 0.96rem + 0.20vw, 1.075rem);
-  --step-1:  clamp(1.20rem, 1.10rem + 0.50vw, 1.45rem);
-  --step-2:  clamp(1.50rem, 1.30rem + 1.00vw, 2.10rem);
-  --step-3:  clamp(2.00rem, 1.55rem + 2.20vw, 3.40rem);
+  --radius:    var(--hb-radius-md);
+  --radius-sm: var(--hb-radius-sm);
+  --container: var(--hb-container);
 
-  --radius:    14px;
-  --radius-sm: 9px;
-  --container: 1120px;
-
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px -12px rgba(0, 0, 0, 0.65);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg:            #f6f8fa;
-    --bg-elevated:   #ffffff;
-    --surface:       #ffffff;
-    --surface-hi:    #eef2f6;
-    --border:        #dde3ea;
-    --border-hi:     #c1ccd8;
-
-    --text:          #101821;
-    --text-muted:    #475569;
-    --text-faint:    #526176;
-
-    --accent:        #0b7a5e;
-    --accent-hi:     #096b52;
-    --accent-dim:    rgba(11, 122, 94, 0.09);
-    --accent-line:   rgba(11, 122, 94, 0.30);
-
-    --accent-2:      #14539f;
-    --accent-2-dim:  rgba(20, 83, 159, 0.09);
-
-    --focus:         #8a4200;
-    --on-accent:     #ffffff;
-
-    --shadow: 0 1px 2px rgba(16, 24, 33, 0.06), 0 12px 28px -14px rgba(16, 24, 33, 0.22);
-  }
+  --shadow: var(--hb-shadow-lg);
 }
 
 /* ---------- 2. Reset & base --------------------------------------------- */
@@ -281,7 +256,7 @@ main { flex: 1 0 auto; }
   align-items: center;
   gap: 0.15rem;
   padding: 0.2rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ui);
   border-radius: 999px;
   background: var(--surface);
   list-style: none;
@@ -301,6 +276,34 @@ main { flex: 1 0 auto; }
 }
 .lang-switch a:hover { color: var(--text); background: var(--surface-hi); }
 .lang-switch a[aria-current] { color: var(--on-accent); background: var(--accent); }
+
+/* Theme toggle. Cycles auto -> light -> dark. The accessible name is written
+   by js/theme.js and says both the current mode and what a press will do, so
+   the icon never has to carry that meaning alone. Hidden when JS is absent,
+   because without JS it could not do anything. */
+.theme-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;
+  border: 1px solid var(--border-ui);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+.js-theme .theme-toggle { display: inline-flex; }
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle svg { display: block; }
+
+/* Exactly one icon is shown, matching the current mode. */
+.theme-toggle [data-icon] { display: none; }
+:root:not([data-theme]) .theme-toggle [data-icon="auto"],
+:root[data-theme="light"] .theme-toggle [data-icon="light"],
+:root[data-theme="dark"]  .theme-toggle [data-icon="dark"] { display: block; }
 
 /* ---------- 5. Hero ------------------------------------------------------ */
 
@@ -381,7 +384,9 @@ main { flex: 1 0 auto; }
 .btn--primary:hover { background: var(--accent-hi); color: var(--on-accent); }
 
 .btn--ghost {
-  border-color: var(--border-hi);
+  /* --border-ui, not --border-hi: an interactive boundary needs 3:1 (WCAG
+     1.4.11). See docs/colour.md in the brand repo. */
+  border-color: var(--border-ui);
   background: var(--surface);
   color: var(--text);
 }

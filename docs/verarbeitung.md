@@ -53,6 +53,23 @@ Wenn das nicht gewollt ist: `js/lang.js` und den `data-set-lang`-Block in
 `js/main.js` entfernen — dann entscheidet bei jedem Aufruf die Browsersprache,
 und es wird gar nichts gespeichert.
 
+## V4 — Darstellungswahl (hell / dunkel) im Browser
+
+| Feld | Wert |
+|---|---|
+| Zweck | Merkt die vom Besucher gewählte Farbdarstellung |
+| Datenkategorien | ein `localStorage`-Eintrag `haugit.theme` mit dem Wert `light` oder `dark` |
+| Auslöser | ausschließlich ein Klick auf den Darstellungsschalter. Der Modus „auto" **löscht** den Eintrag, statt das Wort `auto` zu speichern; die automatische Erkennung **liest** nur `prefers-color-scheme` und schreibt nichts |
+| Empfänger | keine — der Wert verlässt den Browser nicht |
+| Personenbezug | keiner: kein Identifier, keine Zusammenführung, kein Rückschluss auf eine Person |
+| § 25 TDDDG | Abs. 2 Nr. 2 — für den ausdrücklich gewünschten Dienst unbedingt erforderlich, daher einwilligungsfrei (**LEGAL-REVIEW**: gängige Auslegung, aber eine Einschätzung) |
+| Speicherdauer | bis der Besucher die Websitedaten in seinem Browser löscht |
+| Löschkonzept | in der Hand des Besuchers; „auto" löscht den Eintrag selbst |
+
+Wenn das nicht gewollt ist: `js/theme.js` und den `data-theme-toggle`-Button
+entfernen — dann entscheidet bei jedem Aufruf `prefers-color-scheme`, und es
+wird nichts gespeichert.
+
 ## Bewusst nicht vorhandene Verarbeitungen
 
 Die folgenden Dinge existieren auf dieser Website **nicht** und dürfen ohne neue
@@ -60,7 +77,7 @@ Bewertung auch nicht eingeführt werden:
 
 - Kontaktformular oder sonstige Formulare (`form-action 'none'` in der CSP)
 - Cookies, `sessionStorage`, IndexedDB
-- `localStorage` für irgendetwas anderes als V3
+- `localStorage` für irgendetwas anderes als V3 und V4
 - Analytics, Tag-Manager, Pixel, A/B-Testing, Fingerprinting
 - Externe Schriftarten, Icon-Dienste, JS-Bibliotheken von einem CDN
 - Eingebettete Karten, Videos, Social-Plugins, Captchas
