@@ -70,6 +70,36 @@ Wenn das nicht gewollt ist: `js/theme.js` und den `data-theme-toggle`-Button
 entfernen — dann entscheidet bei jedem Aufruf `prefers-color-scheme`, und es
 wird nichts gespeichert.
 
+## V5 — MCU-Tracker: Sichtungsfortschritt (`/mcu/`)
+
+| Feld | Wert |
+|---|---|
+| Zweck | Merkt, welche Titel im MCU-Tracker als gesehen markiert wurden, sowie die zuletzt gewählten Anzeigeoptionen (Episoden-Aufteilung, Nicht-MCU einblenden, Post-Credit-Hinweis, Sortierung) |
+| Datenkategorien | ein `localStorage`-Eintrag `haugit.mcu.progress` mit einer JSON-Struktur: Titel-IDs (feste, im Quellcode definierte Kennungen wie `iron-man`, keine personenbezogene Kennung) auf `true`/`false`, plus die genannten Anzeigeoptionen |
+| Auslöser | ausschließlich Klicks auf die „gesehen"-Kästchen bzw. die Options-Schalter auf `/mcu/` |
+| Empfänger | keine — der Wert verlässt den Browser nicht, auch nicht bei aktiviertem TMDb-Abgleich (siehe V6) |
+| Personenbezug | keiner: die Titel-IDs sind feste Werkskennungen aus dem Datensatz, kein Bezug zur besuchenden Person, keine Zusammenführung mit anderen Daten |
+| § 25 TDDDG | Abs. 2 Nr. 2 — für den ausdrücklich angeforderten Tracking-Dienst unbedingt erforderlich, daher einwilligungsfrei (**LEGAL-REVIEW**: gleiche Einordnung wie V3/V4, gängige Auslegung) |
+| Speicherdauer | bis der Besucher die Websitedaten löscht oder den „Fortschritt zurücksetzen"-Knopf benutzt |
+| Löschkonzept | in der Hand des Besuchers; ein Export (JSON-Datei-Download, rein clientseitig über `Blob`/`URL.createObjectURL`) und ein passender Import stehen zusätzlich zur Verfügung, damit ein Browserwechsel den Fortschritt nicht zwingend löscht |
+
+## V6 — MCU-Tracker: optionaler TMDb-Live-Abgleich (`/mcu/`)
+
+| Feld | Wert |
+|---|---|
+| Zweck | Zeigt aktuelle Poster und Wertungen von TMDb (The Movie Database) an, wenn der Besucher das ausdrücklich aktiviert |
+| Datenkategorien (lokal) | ein `localStorage`-Eintrag `haugit.mcu.tmdbKey` mit dem selbst eingetragenen TMDb-API-Schlüssel des Besuchers |
+| Datenkategorien (an TMDb übertragen) | IP-Adresse und Standard-HTTP-Kopfzeilen des Besuchers, sowie der API-Schlüssel selbst, bei jeder Anfrage an `api.themoviedb.org` / `image.tmdb.org` |
+| Auslöser | ausschließlich das Eintragen eines eigenen TMDb-API-Schlüssels im Einstellungsdialog. Ohne eingetragenen Schlüssel findet **keine** Netzwerkanfrage von `/mcu/` statt |
+| Empfänger | **TMDB (The Movie Database)**, eine US-amerikanische Plattform — siehe `auftragsverarbeiter.md` |
+| Drittland | Ja (USA) — **LEGAL-REVIEW, ungeklärt**, siehe `auftragsverarbeiter.md` |
+| Rechtsgrundlage | Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch die aktive, informierte Handlung des Eintragens eines eigenen Schlüssels — der Einstellungsdialog erklärt vorher, was passiert) |
+| Speicherdauer (lokal) | bis der Besucher den Schlüssel über „Schlüssel löschen" entfernt oder die Websitedaten löscht |
+| Speicherdauer (bei TMDb) | nicht durch den Betreiber dieser Seite bestimmbar — richtet sich nach TMDbs eigener Datenschutzerklärung |
+| Löschkonzept | vollständig in der Hand des Besuchers: Schlüssel entfernen beendet die Funktion sofort, die Offline-Basisdaten bleiben unverändert nutzbar |
+
+Diese Funktion ist die einzige bewusste Ausnahme von der Grundregel „lädt nichts von Dritten" (siehe README, Abschnitt „Rules for this repository") — und nur, weil sie erstens standardmäßig aus ist, zweitens einen vom Besucher selbst besorgten und eingetragenen Schlüssel voraussetzt, und drittens im Einstellungsdialog vor der Eingabe erklärt wird.
+
 ## Bewusst nicht vorhandene Verarbeitungen
 
 Die folgenden Dinge existieren auf dieser Website **nicht** und dürfen ohne neue
@@ -77,11 +107,14 @@ Bewertung auch nicht eingeführt werden:
 
 - Kontaktformular oder sonstige Formulare (`form-action 'none'` in der CSP)
 - Cookies, `sessionStorage`, IndexedDB
-- `localStorage` für irgendetwas anderes als V3 und V4
+- `localStorage` für irgendetwas anderes als V3, V4, V5 und V6
 - Analytics, Tag-Manager, Pixel, A/B-Testing, Fingerprinting
 - Externe Schriftarten, Icon-Dienste, JS-Bibliotheken von einem CDN
 - Eingebettete Karten, Videos, Social-Plugins, Captchas
 - Newsletter, Konten, Login, Warenkorb, Zahlungen
+- Netzwerkanfragen von `/mcu/` an TMDb ohne einen vom Besucher selbst
+  eingetragenen API-Schlüssel (siehe V6) — der Grundzustand der Seite bleibt
+  vollständig ohne Drittanfragen
 
 **Wenn eines davon hinzukommt**, sind vor dem Merge zu klären: Rechtsgrundlage,
 Einwilligungsbedarf nach § 25 TDDDG (dann Consent-Banner mit gleichwertigem

@@ -126,18 +126,36 @@
                 <td>Remembers the colour scheme you chose</td>
                 <td>Until you clear site data</td>
               </tr>
+              <tr>
+                <td><code>haugit.mcu.progress</code></td>
+                <td>JSON: watched title IDs and display options</td>
+                <td>You tick a "watched" checkbox or an option toggle in the <a href="mcu/">MCU Tracker</a></td>
+                <td>Remembers your watch progress</td>
+                <td>Until you clear site data or use "reset progress"</td>
+              </tr>
+              <tr>
+                <td><code>haugit.mcu.tmdbKey</code></td>
+                <td>Your own, self-supplied TMDb API key</td>
+                <td>You voluntarily paste your own TMDb key into the MCU Tracker</td>
+                <td>Enables optional live poster/rating sync</td>
+                <td>Until you use "clear key" or clear site data</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
         <p>
-          Both entries stay in your browser. They are never transmitted to the
-          server, to the operator or to anyone else, contain no identifier, and
-          allow no conclusion about who you are. Setting the theme back to
-          <em>auto</em> deletes its entry rather than storing the word "auto".
-          You can remove both at any time through your browser's site data; the
-          site then works exactly as before and falls back to your browser
-          language and your operating system's colour scheme.
+          All four entries stay in your browser. They are never transmitted to
+          the server or to the operator, contain no identifier, and allow no
+          conclusion about who you are. The <code>haugit.mcu.tmdbKey</code>
+          entry is the one exception once you fill it in yourself: from then
+          on your browser sends your IP address and the key directly to TMDb
+          on every request inside the MCU Tracker — see section 5 below and
+          <code>docs/verarbeitung.md</code> (V6). Setting the theme back to
+          <em>auto</em> deletes the <code>haugit.theme</code> entry rather than
+          storing the word "auto". You can remove any of these at any time
+          through your browser's site data; the site then works exactly as
+          before.
         </p>
         <p>
           On your first visit the site reads your browser language and your
@@ -241,6 +259,27 @@
               has to be checked on the day, because a certification can lapse.</li>
           </ol>
           The alternative that disposes of all three: hosting inside the EU/EEA.
+        </div>
+
+        <h3>TMDB (The Movie Database) — only if you turn it on in the MCU Tracker</h3>
+        <p>
+          The <a href="mcu/">MCU Tracker</a> loads its base data from this
+          site's own source code — no third-party connection happens by
+          default. If you voluntarily paste your own, self-obtained TMDb API
+          key into the tracker's Settings dialog, your browser then sends your
+          IP address, standard HTTP headers and that key directly to
+          <code>api.themoviedb.org</code> and <code>image.tmdb.org</code> —
+          servers operated by TMDB, a US company — on every request inside the
+          tracker. The legal basis is your consent, given by the active act of
+          entering the key (Art. 6(1)(a) GDPR); the Settings dialog explains
+          this before you do.
+        </p>
+        <div class="todo">
+          <strong>LEGAL-REVIEW:</strong> TMDB's own privacy policy names
+          server locations outside the EU/EEA without naming a specific
+          transfer mechanism (DPF certification, Standard Contractual
+          Clauses). Details and the state of this check are in
+          <code>docs/auftragsverarbeiter.md</code>.
         </div>
 
         <h2>6. External links</h2>

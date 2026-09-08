@@ -1,0 +1,311 @@
+/* =========================================================================
+   haug-it.eu — MCU tracker
+
+   Scoped to /mcu/*.html only. Uses the same --hb-*/local token aliases as
+   style.css (loaded before this file) and the same rules: no literal
+   colours, no inline styles, nothing loaded from a third party by default.
+   ========================================================================= */
+
+/* ---------- Progress summary --------------------------------------------- */
+
+.mcu-summary { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+
+.mcu-summary__bar {
+  height: 0.6rem;
+  border-radius: 999px;
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.mcu-summary__fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+.mcu-summary__text {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+.mcu-summary__next {
+  margin: 0.2rem 0 0;
+  font-size: var(--step--1);
+  color: var(--text-faint);
+}
+
+/* ---------- Toolbar -------------------------------------------------------- */
+
+.mcu-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  padding: 1.1rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.mcu-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.mcu-field label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+.mcu-field input[type="text"],
+.mcu-field input[type="password"],
+.mcu-field select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--step--1);
+  min-width: 12rem;
+}
+.mcu-field input:focus-visible,
+.mcu-field select:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.mcu-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+.mcu-file-btn { position: relative; cursor: pointer; overflow: hidden; }
+.mcu-file-btn input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ---------- Filters -------------------------------------------------------- */
+
+.mcu-filters {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  padding: 1.1rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.mcu-filter-group { border: 0; margin: 0; padding: 0; }
+.mcu-filter-group legend {
+  padding: 0;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.mcu-checks { display: flex; flex-wrap: wrap; gap: 0.45rem 0.9rem; }
+
+.mcu-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.mcu-check input { accent-color: var(--accent); width: 1.05rem; height: 1.05rem; }
+
+.mcu-results-count {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-faint);
+}
+
+/* ---------- List ------------------------------------------------------------ */
+
+.mcu-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+
+.mcu-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 0.5rem 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color 0.15s ease;
+}
+.mcu-item:has(.mcu-item__watched:checked) { border-color: var(--accent-line); background: var(--accent-dim); }
+
+.mcu-item__watched { grid-row: 1 / span 2; margin-top: 0.3rem; accent-color: var(--accent); width: 1.2rem; height: 1.2rem; }
+
+.mcu-item__title {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 650;
+}
+.mcu-item__title .mcu-item__index {
+  margin-right: 0.5rem;
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.mcu-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.7rem;
+  margin: 0.35rem 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-faint);
+}
+
+.mcu-item__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-self: end;
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.mcu-badge {
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--border-hi);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+.mcu-badge--film { border-color: var(--accent-line); color: var(--accent); }
+.mcu-badge--series { border-color: var(--accent-2); color: var(--accent-2); }
+.mcu-badge--special,
+.mcu-badge--short { color: var(--text-muted); }
+.mcu-badge--essential { border-color: var(--focus); color: var(--focus); }
+.mcu-badge--nonmcu { color: var(--text-faint); font-style: italic; }
+.mcu-badge--unreleased { border-style: dashed; }
+
+.mcu-item__scores {
+  grid-column: 2 / span 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.5rem;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+.mcu-item__score strong { color: var(--text); }
+
+.mcu-item__postcredit {
+  grid-column: 2 / span 2;
+  margin: 0.4rem 0 0;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.mcu-item__episodes {
+  grid-column: 1 / -1;
+  margin: 0.6rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.mcu-episode {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+.mcu-episode input { accent-color: var(--accent); }
+
+.mcu-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-faint);
+  border: 1px dashed var(--border-hi);
+  border-radius: var(--radius);
+}
+
+.mcu-methodology { font-size: var(--step--1); }
+#mcu-data-asof { display: block; margin-top: 0.3rem; color: var(--text-faint); }
+
+/* ---------- Settings dialog ------------------------------------------------ */
+
+.mcu-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  backdrop-filter: blur(3px);
+}
+.mcu-dialog-backdrop[hidden] { display: none; }
+
+.mcu-dialog {
+  width: 100%;
+  max-width: 34rem;
+  max-height: min(85vh, 42rem);
+  overflow-y: auto;
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  padding: 1.4rem;
+}
+
+.mcu-dialog__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.mcu-dialog__head h2 { margin: 0; }
+
+.mcu-dialog__close {
+  border: 1px solid var(--border-ui);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  width: 2.1rem;
+  height: 2.1rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.mcu-dialog__close:hover { color: var(--accent); border-color: var(--accent); }
+
+.mcu-dialog__body h3 { margin-top: 1.3rem; font-size: var(--step-0); }
+.mcu-dialog__body h3:first-child { margin-top: 0; }
+.mcu-dialog__body p { color: var(--text-muted); font-size: var(--step--1); }
+.mcu-dialog__body code {
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: var(--surface-hi);
+}
+
+.mcu-tmdb-status { min-height: 1.2em; font-size: var(--step--1); color: var(--accent); }
+
+@media (max-width: 38rem) {
+  .mcu-item { grid-template-columns: auto 1fr; }
+  .mcu-item__badges { grid-column: 1 / -1; grid-row: auto; justify-self: start; }
+  .mcu-item__scores,
+  .mcu-item__postcredit,
+  .mcu-item__episodes { grid-column: 1 / -1; }
+}

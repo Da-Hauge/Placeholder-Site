@@ -11,6 +11,7 @@ zusätzlich hier.
 |---|---|---|---|---|---|
 | GitHub, Inc. (GitHub Pages) | Hosting und Auslieferung der statischen Seiten | IP-Adresse, Zeitstempel, URL, User-Agent, Referrer (Server-Logs) | USA / global (CDN) | siehe unten | **LEGAL-REVIEW** (eingegrenzt) |
 | Mailanbieter der Kontaktadresse | Empfang und Speicherung eingehender E-Mails | E-Mail-Adresse, Name, Nachrichteninhalt | **unbekannt** | **offen** | **offen — bitte ergänzen** |
+| TMDB (The Movie Database) | *Nur wenn der Besucher im MCU-Tracker (`/mcu/`) einen eigenen API-Schlüssel einträgt:* Poster und aktuelle Wertungen live nachladen | IP-Adresse, Standard-HTTP-Kopfzeilen, der eingetragene API-Schlüssel | USA (laut eigener Datenschutzerklärung; ggf. weitere Länder über Zulieferer) | **offen** | **LEGAL-REVIEW — konditionale Verarbeitung, siehe unten** |
 
 ## GitHub Pages — was recherchiert und belegt ist
 
@@ -70,16 +71,48 @@ Kontaktadresse ist hier noch nicht eingetragen — das weiß nur der Betreiber.
 Ergänzen: Anbieter, Serverstandort, AVV-Status, Aufbewahrungsdauer. Liegt der
 Anbieter außerhalb der EU/des EWR, gilt dieselbe Prüfung wie oben.
 
-## Kein Auftragsverarbeiter: Sprach- und Darstellungswahl
+## TMDB (The Movie Database) — konditional, nur `/mcu/`
 
-Die Einträge `haugit.lang` und `haugit.theme` im `localStorage` bleiben
+Recherchiert am 2026-09-08, Primärquelle TMDBs eigene Datenschutzerklärung
+(themoviedb.org/privacy-policy):
+
+**Auslöser.** Diese Verarbeitung findet nur statt, wenn der Besucher im
+MCU-Tracker den Einstellungsdialog öffnet und dort einen eigenen,
+selbstbeschafften TMDb-API-Schlüssel einträgt. Ohne eingetragenen Schlüssel
+lädt `/mcu/` ausschließlich die im Repository ausgelieferten, statischen
+Daten — keine Anfrage an TMDb, keine Drittanfrage überhaupt.
+
+**Transfermittel — nicht geklärt.** TMDBs eigene Datenschutzerklärung nennt
+Serverstandorte außerhalb der EU/des EWR (insbesondere USA) und verweist
+allgemein auf Drittlandtransfers, ohne dabei — anders als GitHub — eine
+DPF-Selbstzertifizierung oder Standardvertragsklauseln ausdrücklich zu
+benennen. **LEGAL-REVIEW:** vor einem produktiven Livegang mit dieser
+Funktion wäre zu prüfen, ob TMDB in der DPF-Teilnehmerliste
+([dataprivacyframework.gov/list](https://www.dataprivacyframework.gov/list))
+geführt wird, und andernfalls, auf welcher Grundlage nach Art. 44 ff. DSGVO
+der Transfer stattfindet.
+
+**Wer verantwortlich ist, ist hier ungewöhnlich.** Der Besucher selbst löst
+die Übertragung aus, mit einem Schlüssel, den er selbst bei TMDb beschafft
+und damit TMDBs eigenen Nutzungsbedingungen bereits zugestimmt hat. Das
+ändert nichts an der Informationspflicht dieser Seite (Art. 13 DSGVO,
+Einstellungsdialog und `datenschutz.html`/`privacy-policy.html` erklären es
+vorher), verkleinert aber die Rolle des Seitenbetreibers gegenüber einem
+Fall, in dem die Seite selbst allen Besuchern automatisch einen eigenen
+Schlüssel unterschieben würde — genau das wurde bewusst vermieden, siehe
+`verarbeitung.md` V6.
+
+## Kein Auftragsverarbeiter: Sprach-, Darstellungs- und Sichtungsfortschritt
+
+Die Einträge `haugit.lang`, `haugit.theme`, `haugit.mcu.progress` und
+(bis auf die TMDb-Zeile oben) `haugit.mcu.tmdbKey` im `localStorage` bleiben
 vollständig im Browser des Besuchers. Sie werden nicht übertragen und von
 niemandem ausgelesen — es gibt dafür also keinen Empfänger und keinen
 Auftragsverarbeiter. Die Einordnung nach § 25 TDDDG steht in `verarbeitung.md`
-(V3, V4).
+(V3, V4, V5, V6).
 
 ## Bewusst nicht eingesetzt
 
 Kein Analytics, kein Error-Tracking, kein CDN für Assets, keine Schriftarten von
-Dritten, keine LLM-API. Es gibt daher außer den beiden Zeilen oben keine weiteren
-Auftragsverarbeiter.
+Dritten, keine LLM-API. Es gibt daher außer den drei Zeilen oben keine weiteren
+Auftragsverarbeiter — TMDB nur konditional, wie beschrieben.
