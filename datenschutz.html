@@ -126,18 +126,35 @@
                 <td>Merkt die gewählte Farbdarstellung</td>
                 <td>Bis Sie die Websitedaten löschen</td>
               </tr>
+              <tr>
+                <td><code>haugit.mcu.progress</code></td>
+                <td>JSON: gesehene Titel-IDs und Anzeigeoptionen</td>
+                <td>Sie benutzen ein „gesehen"-Kästchen oder einen Options-Schalter im <a href="mcu/">MCU-Tracker</a></td>
+                <td>Merkt Ihren Sichtungsfortschritt</td>
+                <td>Bis Sie die Websitedaten löschen oder „Fortschritt zurücksetzen" benutzen</td>
+              </tr>
+              <tr>
+                <td><code>haugit.mcu.tmdbKey</code></td>
+                <td>Ihr eigener, selbst eingetragener TMDb-API-Schlüssel</td>
+                <td>Sie tragen im MCU-Tracker freiwillig einen eigenen TMDb-Schlüssel ein</td>
+                <td>Aktiviert optionalen Live-Abgleich von Postern/Wertungen</td>
+                <td>Bis Sie „Schlüssel löschen" benutzen oder die Websitedaten löschen</td>
+              </tr>
             </tbody>
           </table>
         </div>
         <p>
-          Beide Einträge bleiben ausschließlich in Ihrem Browser. Sie werden
-          nicht an den Server, an mich oder an Dritte übertragen, enthalten
-          keine Kennung und lassen keinen Rückschluss auf Ihre Person zu. Wenn
+          Alle vier Einträge bleiben ausschließlich in Ihrem Browser. Sie
+          werden nicht an den Server oder an mich übertragen, enthalten keine
+          Kennung und lassen keinen Rückschluss auf Ihre Person zu. Der
+          <code>haugit.mcu.tmdbKey</code>-Eintrag ist eine Ausnahme, sobald Sie
+          ihn selbst befüllen: Ab dann sendet Ihr Browser bei jeder Anfrage im
+          MCU-Tracker Ihre IP-Adresse und den Schlüssel direkt an TMDb, siehe
+          Abschnitt 4 unten und <code>docs/verarbeitung.md</code> (V6). Wenn
           Sie die Darstellung wieder auf <em>Automatik</em> stellen, wird der
-          Eintrag gelöscht statt auf „auto" gesetzt. Sie können beide jederzeit
-          über die Websitedaten Ihres Browsers entfernen; die Seite funktioniert
-          danach unverändert und richtet sich wieder nach Ihrer Browsersprache
-          und der Farbeinstellung Ihres Betriebssystems.
+          <code>haugit.theme</code>-Eintrag gelöscht statt auf „auto" gesetzt.
+          Sie können alle Einträge jederzeit über die Websitedaten Ihres
+          Browsers entfernen; die Seite funktioniert danach unverändert.
         </p>
         <p>
           Beim ersten Aufruf werden Ihre Browsersprache und die Farbeinstellung
@@ -251,6 +268,28 @@
           Die interne Übersicht dazu liegt im Repository unter
           <code>docs/auftragsverarbeiter.md</code>.
         </p>
+
+        <h3>TMDB (The Movie Database) — nur wenn Sie es im MCU-Tracker aktivieren</h3>
+        <p>
+          Der <a href="mcu/">MCU-Tracker</a> lädt seine Grunddaten fest aus
+          dem Quellcode dieser Seite — dabei findet keine Verbindung zu
+          Dritten statt. Tragen Sie im Einstellungsdialog des Trackers
+          freiwillig einen eigenen, bei TMDb selbst beschafften API-Schlüssel
+          ein, sendet Ihr Browser ab diesem Zeitpunkt bei jeder Anfrage im
+          Tracker Ihre IP-Adresse, Standard-HTTP-Kopfzeilen und diesen
+          Schlüssel direkt an <code>api.themoviedb.org</code> und
+          <code>image.tmdb.org</code> — Server von TMDB, einem
+          US-amerikanischen Anbieter. Rechtsgrundlage ist Ihre Einwilligung
+          durch das aktive Eintragen des Schlüssels (Art. 6 Abs. 1 lit. a
+          DSGVO); der Einstellungsdialog erklärt das vorher.
+        </p>
+        <div class="todo">
+          <strong>LEGAL-REVIEW:</strong> TMDBs eigene Datenschutzerklärung
+          benennt Serverstandorte außerhalb der EU/des EWR, ohne dabei ein
+          konkretes Transfermittel (DPF-Zertifizierung, Standardvertragsklauseln)
+          zu nennen. Details und der Stand der Prüfung in
+          <code>docs/auftragsverarbeiter.md</code>.
+        </div>
 
         <h2>5. Externe Links</h2>
         <p>

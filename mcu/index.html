@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Same policy as the rest of the site (see docs/security-hinweise.md),
+       widened by exactly two hosts so the OPTIONAL, user-supplied TMDb key
+       in Settings can work: api.themoviedb.org (data) and image.tmdb.org
+       (posters). Nothing is requested from either host unless the visitor
+       pastes their own key — see js/mcu.js and docs/verarbeitung.md V6.
+       Still no 'unsafe-inline', no wildcards, form-action stays 'none'
+       (no <form> is used; inputs are handled entirely by JS). -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data: https://image.tmdb.org; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self' https://api.themoviedb.org; object-src 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>MCU Tracker | haug-it.eu</title>
+  <meta name="description" content="Track every Marvel Cinematic Universe film and series — sort by release or story order, filter by category or sub-saga, mark what you have watched, and keep your own progress.">
+  <link rel="canonical" href="https://haug-it.eu/mcu/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/mcu.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../">
+        <span class="brand__sigil">~/</span><span>haug-it</span><span class="brand__dim">.eu</span>
+      </a>
+
+      <div class="header__end">
+        <nav class="nav" aria-label="Main">
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="./" aria-current="page">MCU Tracker</a></li>
+          </ul>
+        </nav>
+
+        <button class="theme-toggle" type="button" data-theme-toggle>
+            <svg data-icon="auto" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></svg>
+            <svg data-icon="light" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+            <svg data-icon="dark" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section section--tight">
+      <div class="container">
+        <p class="eyebrow">Watch tracker</p>
+        <h1 data-i18n="title">MCU Tracker</h1>
+        <p class="section__lead" data-i18n="lead">
+          Every Marvel Studios film and series, sortable by release date or
+          by story timeline, filterable by category and by corner of the
+          universe. Mark what you have watched — it stays only in this
+          browser.
+        </p>
+
+        <noscript>
+          <p class="note">
+            This tracker needs JavaScript to filter, sort and remember your
+            progress. Without it there is nothing reliable to show here — try
+            <a href="https://www.marvel.com/movies" rel="noopener noreferrer">Marvel's own film list</a>
+            instead, or turn JavaScript back on for this page.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <div id="mcu-app" class="section section--tight" hidden>
+      <div class="container">
+
+        <!-- ===== Progress summary ===== -->
+        <section class="mcu-summary" aria-labelledby="mcu-summary-title">
+          <h2 id="mcu-summary-title" class="visually-hidden" data-i18n="progressHeading">Your progress</h2>
+          <div class="mcu-summary__bar" role="progressbar" aria-labelledby="mcu-summary-title" aria-valuemin="0" aria-valuemax="100" id="mcu-progressbar">
+            <div class="mcu-summary__fill" id="mcu-progressbar-fill"></div>
+          </div>
+          <p class="mcu-summary__text" id="mcu-progress-text"></p>
+          <p class="mcu-summary__next" id="mcu-progress-next"></p>
+        </section>
+
+        <!-- ===== Toolbar: search, order, save ===== -->
+        <section class="mcu-toolbar" aria-label="Search and data controls">
+          <div class="mcu-field">
+            <label for="mcu-search" data-i18n="searchLabel">Search</label>
+            <input type="text" id="mcu-search" autocomplete="off" spellcheck="false">
+          </div>
+
+          <div class="mcu-field">
+            <label for="mcu-order" data-i18n="orderLabel">Order</label>
+            <select id="mcu-order">
+              <option value="release" data-i18n="orderRelease">Release date</option>
+              <option value="timeline" data-i18n="orderTimeline">Story timeline</option>
+              <option value="title" data-i18n="orderTitle">Title (A&ndash;Z)</option>
+              <option value="critic" data-i18n="orderCritic">Critic score</option>
+              <option value="importance" data-i18n="orderImportance">Importance to the plot</option>
+            </select>
+          </div>
+
+          <div class="mcu-toolbar__actions">
+            <button type="button" class="btn btn--ghost" id="mcu-export" data-i18n="exportBtn">Export progress</button>
+            <label class="btn btn--ghost mcu-file-btn">
+              <span data-i18n="importBtn">Import progress</span>
+              <input type="file" id="mcu-import" accept="application/json,.json">
+            </label>
+            <button type="button" class="btn btn--ghost" id="mcu-settings-open" aria-haspopup="dialog" aria-controls="mcu-settings" data-i18n="settingsBtn">Settings</button>
+            <button type="button" class="btn btn--ghost" id="mcu-lang-toggle" lang="de">DE</button>
+          </div>
+        </section>
+
+        <!-- ===== Filters ===== -->
+        <section class="mcu-filters" aria-labelledby="mcu-filters-title">
+          <h2 id="mcu-filters-title" class="visually-hidden" data-i18n="filtersHeading">Filters</h2>
+
+          <fieldset class="mcu-filter-group">
+            <legend data-i18n="categoryLegend">Category</legend>
+            <div class="mcu-checks" id="mcu-category-filters"></div>
+          </fieldset>
+
+          <fieldset class="mcu-filter-group">
+            <legend data-i18n="partLegend">Part of the universe</legend>
+            <div class="mcu-checks" id="mcu-part-filters"></div>
+          </fieldset>
+
+          <fieldset class="mcu-filter-group">
+            <legend data-i18n="optionsLegend">Options</legend>
+            <div class="mcu-checks">
+              <label class="mcu-check">
+                <input type="checkbox" id="mcu-opt-episodes">
+                <span data-i18n="optEpisodes">Split series into episodes</span>
+              </label>
+              <label class="mcu-check">
+                <input type="checkbox" id="mcu-opt-nonmcu">
+                <span data-i18n="optNonMcu">Include non-MCU Marvel films (Sony, Fox, pre-2019 TV)</span>
+              </label>
+              <label class="mcu-check">
+                <input type="checkbox" id="mcu-opt-postcredit">
+                <span data-i18n="optPostCredit">Show post-credit scene info (mild spoiler: whether one exists)</span>
+              </label>
+              <label class="mcu-check">
+                <input type="checkbox" id="mcu-opt-unwatched">
+                <span data-i18n="optUnwatchedOnly">Unwatched only</span>
+              </label>
+            </div>
+          </fieldset>
+        </section>
+
+        <p class="mcu-results-count" id="mcu-results-count" role="status" aria-live="polite"></p>
+
+        <!-- ===== Results ===== -->
+        <ol class="mcu-list" id="mcu-list"></ol>
+
+        <p class="mcu-empty" id="mcu-empty" hidden data-i18n="emptyState">Nothing matches these filters.</p>
+
+        <p class="note mcu-methodology">
+          <strong data-i18n="aboutDataTitle">About the data:</strong>
+          <span data-i18n="aboutDataText">Critic and audience scores are Rotten Tomatoes / IMDb figures captured on the date below and are not updated automatically. The importance tier is a synthesis of several published MCU viewing-order guides, not a single official ranking. Details and sources in the</span>
+          <a href="methodology.html" data-i18n="aboutDataLink">methodology notes</a>.
+          <span id="mcu-data-asof"></span>
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== Settings dialog ===== -->
+    <div class="mcu-dialog-backdrop" id="mcu-settings-backdrop" hidden>
+      <div class="mcu-dialog" id="mcu-settings" role="dialog" aria-modal="true" aria-labelledby="mcu-settings-title">
+        <div class="mcu-dialog__head">
+          <h2 id="mcu-settings-title" data-i18n="settingsTitle">Settings</h2>
+          <button type="button" class="mcu-dialog__close" id="mcu-settings-close" aria-label="Close">&times;</button>
+        </div>
+
+        <div class="mcu-dialog__body">
+          <h3 data-i18n="settingsTmdbTitle">Optional: live TMDb sync</h3>
+          <p data-i18n="settingsTmdbText">
+            The tracker ships with a fixed, offline dataset by default — no
+            network request happens unless you add your own free TMDb API key
+            here. If you do, this page will contact
+            <code>api.themoviedb.org</code> and <code>image.tmdb.org</code>
+            directly from your browser, using your key, to show posters and
+            refresh ratings. The key is stored only in this browser
+            (<code>localStorage</code>) and is never sent anywhere except to
+            TMDb itself.
+          </p>
+          <p>
+            <a href="https://www.themoviedb.org/settings/api" rel="noopener noreferrer" data-i18n="settingsTmdbLink">Get a free TMDb API key &rarr;</a>
+          </p>
+          <div class="mcu-field">
+            <label for="mcu-tmdb-key" data-i18n="settingsTmdbKeyLabel">TMDb API key (v3 auth)</label>
+            <input type="password" id="mcu-tmdb-key" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="mcu-toolbar__actions">
+            <button type="button" class="btn btn--primary" id="mcu-tmdb-save" data-i18n="settingsTmdbSave">Save key</button>
+            <button type="button" class="btn btn--ghost" id="mcu-tmdb-clear" data-i18n="settingsTmdbClear">Clear key</button>
+          </div>
+          <p class="mcu-tmdb-status" id="mcu-tmdb-status" role="status" aria-live="polite"></p>
+
+          <h3 data-i18n="settingsDataTitle">Your data</h3>
+          <p data-i18n="settingsDataText">Everything below only ever lives in this browser. Clearing it cannot be undone unless you exported a copy first.</p>
+          <button type="button" class="btn btn--ghost" id="mcu-reset-progress" data-i18n="settingsResetProgress">Reset all watched progress</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__note">&copy; 2026 haug-it.eu</p>
+      <nav aria-label="Legal">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="methodology.html">Data &amp; methodology</a></li>
+          <li><a href="../impressum.html" lang="de">Impressum</a></li>
+          <li><a href="../privacy-policy.html">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/mcu-data.js" defer></script>
+  <script src="../js/mcu-i18n.js" defer></script>
+  <script src="../js/mcu.js" defer></script>
+</body>
+</html>

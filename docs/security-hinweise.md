@@ -1,6 +1,6 @@
 # Sicherheitshinweise — haug-it.eu
 
-Stand: 2026-09-07. Bezug: OWASP Top 10:2025, CLAUDE.md Abschnitt 2.
+Stand: 2026-09-08. Bezug: OWASP Top 10:2025, CLAUDE.md Abschnitt 2.
 
 ## Was umgesetzt ist
 
@@ -47,6 +47,31 @@ im Fehlerfall *offen* ausfällt: der versteckte Zustand wird nur gesetzt, wenn
 `IntersectionObserver` vorhanden ist, und ein Timeout macht nach vier Sekunden
 in jedem Fall alles wieder sichtbar. Ohne JavaScript ist die Seite vollständig
 lesbar und bedienbar.
+
+## MCU-Tracker (`/mcu/`) — Abweichungen von der Standard-CSP
+
+`/mcu/index.html` und `/mcu/methodology.html` tragen dieselbe restriktive
+Policy wie jede andere Seite, mit genau zwei zusätzlichen Hosts in
+`connect-src` (`https://api.themoviedb.org`) und `img-src`
+(`https://image.tmdb.org`). Kein `unsafe-inline`, kein Wildcard, `object-src`
+und `frame-src` bleiben `'none'`. Diese Anfragen laufen nur, wenn der Besuchende
+im Einstellungsdialog einen eigenen TMDb-Schlüssel einträgt — siehe
+`docs/verarbeitung.md` (V6) und `docs/auftragsverarbeiter.md`. Grundzustand
+der Seite: keine einzige Drittanfrage.
+
+**Import/Export des Sichtungsfortschritts.** Der Export erzeugt clientseitig
+eine `Blob`/`URL.createObjectURL`-Datei, keine Serveranfrage. Der Import liest
+eine vom Besuchenden gewählte Datei über `FileReader`, parst sie mit
+`JSON.parse` in einem `try`/`catch` und übernimmt nur Einträge, deren Schlüssel
+ein String und deren Wert ein Boolean ist — alles andere wird verworfen.
+Importierte Werte werden nie mit `innerHTML` oder `eval` verarbeitet, nur als
+Objektfelder gelesen und über `textContent`/DOM-Methoden dargestellt: eine
+präparierte Importdatei kann höchstens falsche Häkchen setzen, keinen Code
+ausführen.
+
+**Kein neuer Formular-Pfad.** Text-, Passwort- und Datei-Inputs auf `/mcu/`
+sitzen außerhalb eines `<form>`-Elements und werden ausschließlich über
+`addEventListener` gelesen; `form-action 'none'` bleibt unverändert gültig.
 
 ## Bekannte Lücken
 
