@@ -75,10 +75,10 @@ wird nichts gespeichert.
 | Feld | Wert |
 |---|---|
 | Zweck | Merkt, welche Titel im MCU-Tracker als gesehen markiert wurden, sowie die zuletzt gewählten Anzeigeoptionen (Episoden-Aufteilung, Nicht-MCU einblenden, Post-Credit-Hinweis, Sortierung) |
-| Datenkategorien | ein `localStorage`-Eintrag `haugit.mcu.progress` mit einer JSON-Struktur: Titel-IDs (feste, im Quellcode definierte Kennungen wie `iron-man`, keine personenbezogene Kennung) auf `true`/`false`, plus die genannten Anzeigeoptionen |
-| Auslöser | ausschließlich Klicks auf die „gesehen"-Kästchen bzw. die Options-Schalter auf `/mcu/` |
-| Empfänger | keine — der Wert verlässt den Browser nicht, auch nicht bei aktiviertem TMDb-Abgleich (siehe V6) |
-| Personenbezug | keiner: die Titel-IDs sind feste Werkskennungen aus dem Datensatz, kein Bezug zur besuchenden Person, keine Zusammenführung mit anderen Daten |
+| Datenkategorien | ein `localStorage`-Eintrag `haugit.mcu.progress` mit einer JSON-Struktur: Titel-/Episoden-IDs (feste, im Quellcode definierte Kennungen wie `iron-man`, keine personenbezogene Kennung) auf `true`/`false`; ein Zeitstempel je zuletzt als „gesehen" markiertem Eintrag (`watchedAt`, für das Diagramm „Gesehen über die Zeit" im Dashboard); die zuletzt angesehene Filmminute laufender, noch nicht abgeschlossener Titel (`filmProgress`); sowie die zuletzt gewählten Anzeige-, Filter-, Gruppierungs- und Sortieroptionen |
+| Auslöser | ausschließlich Klicks auf die „gesehen"-Kästchen, den Minuten-Regler in der Detailansicht, bzw. die Filter-/Options-Schalter auf `/mcu/` und `/mcu/dashboard.html` |
+| Empfänger | keine — der Wert verlässt den Browser nicht, auch nicht bei aktiviertem TMDb-Abgleich (siehe V6). Das Dashboard liest denselben Eintrag nur, es schreibt nichts zusätzlich |
+| Personenbezug | keiner: die Titel-/Episoden-IDs sind feste Werkskennungen aus dem Datensatz, die Zeitstempel betreffen ausschließlich den Sichtungszeitpunkt eines Werks (nicht Ort, Gerät oder sonstige Umstände), kein Bezug zur besuchenden Person, keine Zusammenführung mit anderen Daten |
 | § 25 TDDDG | Abs. 2 Nr. 2 — für den ausdrücklich angeforderten Tracking-Dienst unbedingt erforderlich, daher einwilligungsfrei (**LEGAL-REVIEW**: gleiche Einordnung wie V3/V4, gängige Auslegung) |
 | Speicherdauer | bis der Besucher die Websitedaten löscht oder den „Fortschritt zurücksetzen"-Knopf benutzt |
 | Löschkonzept | in der Hand des Besuchers; ein Export (JSON-Datei-Download, rein clientseitig über `Blob`/`URL.createObjectURL`) und ein passender Import stehen zusätzlich zur Verfügung, damit ein Browserwechsel den Fortschritt nicht zwingend löscht |

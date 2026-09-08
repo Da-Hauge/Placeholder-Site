@@ -82,7 +82,70 @@ window.MCU_I18N = {
       "blade-original": "Blade (1998–2004)",
       "marvel-television-abc": "Marvel Television (ABC)",
       "marvel-netflix": "Marvel Television (Netflix)"
-    }
+    },
+    studios: {
+      "marvel-studios": "Marvel Studios",
+      "sony-spiderverse": "Sony Pictures",
+      "fox-x-men": "20th Century Fox",
+      "blade-original": "New Line Cinema",
+      "marvel-television-abc": "Marvel Television (ABC)",
+      "marvel-netflix": "Marvel Television (Netflix)"
+    },
+    platforms: {
+      DPLUS: "Disney+",
+      RENT: "Digital rental/purchase",
+      SOON: "Theatrical (upcoming)"
+    },
+    platformNote: "Typical platform, not live availability — see the methodology notes.",
+
+    studioLegend: "Studio",
+    groupByLabel: "Group by",
+    groupByNone: "No grouping",
+    groupByPhase: "Phase / saga",
+    groupByStudio: "Studio",
+    groupByCategory: "Category",
+    viewToggleComfortable: "Comfortable view",
+    viewToggleCompact: "Compact view",
+    dashboardLink: "Dashboard",
+    backToTracker: "Back to tracker",
+
+    mselAll: "Select all",
+    mselClear: "Clear",
+    mselNone: "All",
+    mselCount: (n) => `${n} selected`,
+
+    optSplitHelp: "When sorting by story timeline, episodes with a known split point appear at their own place in the story instead of the whole season in one spot (currently modelled for What If...? Season 1). In every other sort order, episodes stay listed together under their series.",
+
+    detailOpen: (title) => `Open details for "${title}"`,
+    detailClose: "Close",
+    triviaHeading: "Trivia",
+    skipRevealBtn: "Show what you'd miss (spoiler)",
+    skipHideBtn: "Hide spoiler",
+    detailScoresHeading: "Scores",
+    detailProgressHeading: "Your progress",
+    detailMarkFull: "Mark fully watched",
+    detailMinutesOf: (m, total) => `${m} / ${total} min`,
+    detailEpisodesHeading: "Episodes",
+    detailInfoHeading: "Details",
+    episodeCount: (n) => (n === 1 ? "1 episode" : `${n} episodes`),
+    runtimeMinutesLabel: (n) => `${n} min`,
+    seasonCount: (n) => (n === 1 ? "1 season" : `${n} seasons`),
+    watchedAtLabel: (date) => `Watched ${date}`,
+
+    dashboardTitle: "MCU Tracker — Dashboard",
+    dashboardLead: "Where your watch-through stands: how much is done, how much is left, and when you watched it.",
+    statWatched: "Watched",
+    statRemaining: "Remaining",
+    statWatchedTime: "Time watched",
+    statRemainingTime: "Time remaining",
+    statTitlesLabel: (n) => (n === 1 ? "1 title" : `${n} titles`),
+    chartOverTimeHeading: "Watched over time",
+    chartOverTimeEmpty: "Mark something watched in the tracker and it'll show up here.",
+    chartByCategoryHeading: "Progress by category",
+    chartByStudioHeading: "Progress by studio",
+    chartByTierHeading: "Progress by importance tier",
+    minutesUnit: "min",
+    hoursUnit: "h"
   },
 
   de: {
@@ -155,6 +218,69 @@ window.MCU_I18N = {
       "blade-original": "Blade (1998–2004)",
       "marvel-television-abc": "Marvel Television (ABC)",
       "marvel-netflix": "Marvel Television (Netflix)"
-    }
+    },
+    studios: {
+      "marvel-studios": "Marvel Studios",
+      "sony-spiderverse": "Sony Pictures",
+      "fox-x-men": "20th Century Fox",
+      "blade-original": "New Line Cinema",
+      "marvel-television-abc": "Marvel Television (ABC)",
+      "marvel-netflix": "Marvel Television (Netflix)"
+    },
+    platforms: {
+      DPLUS: "Disney+",
+      RENT: "Digitaler Verleih/Kauf",
+      SOON: "Kino (demnächst)"
+    },
+    platformNote: "Typische Plattform, keine Live-Verfügbarkeit — siehe die Methodik-Hinweise.",
+
+    studioLegend: "Studio",
+    groupByLabel: "Gruppieren nach",
+    groupByNone: "Keine Gruppierung",
+    groupByPhase: "Phase / Saga",
+    groupByStudio: "Studio",
+    groupByCategory: "Kategorie",
+    viewToggleComfortable: "Komfort-Ansicht",
+    viewToggleCompact: "Kompakt-Ansicht",
+    dashboardLink: "Dashboard",
+    backToTracker: "Zurück zum Tracker",
+
+    mselAll: "Alle auswählen",
+    mselClear: "Leeren",
+    mselNone: "Alle",
+    mselCount: (n) => `${n} ausgewählt`,
+
+    optSplitHelp: "Bei Sortierung nach Handlungschronologie erscheinen Episoden mit bekanntem Aufteilungspunkt an ihrer eigenen Stelle in der Geschichte, statt die ganze Staffel an einer Stelle (aktuell für What If...? Staffel 1 hinterlegt). In jeder anderen Sortierung bleiben Episoden gemeinsam unter ihrer Serie gelistet.",
+
+    detailOpen: (title) => `Details zu „${title}“ öffnen`,
+    detailClose: "Schließen",
+    triviaHeading: "Insiderwissen",
+    skipRevealBtn: "Zeigen, was man verpasst (Spoiler)",
+    skipHideBtn: "Spoiler ausblenden",
+    detailScoresHeading: "Wertungen",
+    detailProgressHeading: "Dein Fortschritt",
+    detailMarkFull: "Als vollständig gesehen markieren",
+    detailMinutesOf: (m, total) => `${m} / ${total} Min.`,
+    detailEpisodesHeading: "Episoden",
+    detailInfoHeading: "Details",
+    episodeCount: (n) => (n === 1 ? "1 Episode" : `${n} Episoden`),
+    runtimeMinutesLabel: (n) => `${n} Min.`,
+    seasonCount: (n) => (n === 1 ? "1 Staffel" : `${n} Staffeln`),
+    watchedAtLabel: (date) => `Gesehen am ${date}`,
+
+    dashboardTitle: "MCU-Tracker — Dashboard",
+    dashboardLead: "Wo dein Durchlauf steht: was fertig ist, was noch fehlt, und wann du es gesehen hast.",
+    statWatched: "Gesehen",
+    statRemaining: "Verbleibend",
+    statWatchedTime: "Gesehene Zeit",
+    statRemainingTime: "Verbleibende Zeit",
+    statTitlesLabel: (n) => (n === 1 ? "1 Titel" : `${n} Titel`),
+    chartOverTimeHeading: "Gesehen über die Zeit",
+    chartOverTimeEmpty: "Markiere im Tracker etwas als gesehen, dann erscheint es hier.",
+    chartByCategoryHeading: "Fortschritt nach Kategorie",
+    chartByStudioHeading: "Fortschritt nach Studio",
+    chartByTierHeading: "Fortschritt nach Bedeutungsstufe",
+    minutesUnit: "Min.",
+    hoursUnit: "Std."
   }
 };
