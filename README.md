@@ -120,10 +120,12 @@ in the same pull request.
 
 ## Open points
 
-- Impressum, Datenschutzerklärung and the English privacy policy contain
-  `TODO` blocks — the legal texts have not been reviewed by a lawyer.
-- Third-country transfer through GitHub Pages (US) is unresolved, see
-  `docs/auftragsverarbeiter.md`.
+- Three prose blocks in `impressum.html` (Haftung für Inhalte, Haftung für
+  Links, Urheberrecht) still need text from a lawyer or a generator. Everything
+  that could be researched instead of drafted is done — the full handover list
+  is `docs/rechtliche-todos.md`.
+- Third-country transfer through GitHub Pages (US) is narrowed but not closed,
+  see `docs/auftragsverarbeiter.md`.
 - HTTP security headers cannot be set on GitHub Pages, see
   `docs/security-hinweise.md`.
 
